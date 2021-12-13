@@ -1,0 +1,25 @@
+.loader
+{
+    
+        position: relative;
+        height: 100vh;
+
+
+   &-item{
+    position: absolute;
+    top: 40%;
+    left: 0;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    
+    img {
+        width: 12%;
+    
+    }
+    p{
+           font-size: 1.5vw;
+    line-height: 1.1;
+    }
+}
+}

@@ -1,0 +1,57 @@
+@import '../../uicommons/variables.scss';
+
+.billing-address-block {
+  padding-bottom: 20px;
+  h3 {
+    font-size: 20px;
+    margin-top: 24px;
+  }
+  p {
+    color: $ikCharcoal;
+  }
+
+  .address-billing-toggle {
+    .toggle-item {
+      border-radius: 16px;
+      box-shadow: 0 5px 20px #1d1d1b1a;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      &:first-child {
+        margin-bottom: 16px;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+      &__title {
+        font-size: 18px;
+        font-weight: 600;
+        color: $ikCharcoal;
+      }
+
+      &__check-state-container {
+        width: 24px;
+        height: 24px;
+        border: 1px solid $ikLightGrey;
+        border-radius: 50%;
+        background-color: white;
+        text-align: center;
+      }
+
+      &.selected {
+        background-color: $ikCharcoal;
+        .toggle-item__title {
+          color: white;
+        }
+
+        .toggle-item__check-state-container {
+          background-color: $ikYellow;
+          border: none;
+        }
+      }
+    }
+  }
+}

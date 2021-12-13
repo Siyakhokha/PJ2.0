@@ -1,0 +1,550 @@
+[
+  {
+    "name": "form",
+    "label": "Shipping information form. Please make sure the form is set to raw html",
+    "required": false,
+    "locked": false,
+    "type": "form",
+    "default": {
+      "form_id": "",
+      "response_type": "inline",
+      "message": "Thanks for submitting the form.",
+      "gotowebinar_webinar_key": null,
+      "form_type": "HUBSPOT"
+    }
+  },
+  {
+    "name": "Review_form",
+    "label": "Review form. Please make sure the form is set to raw html",
+    "required": false,
+    "locked": false,
+    "type": "form",
+    "default": {
+      "form_id": "",
+      "response_type": "inline",
+      "message": "Thanks for submitting the review.",
+      "gotowebinar_webinar_key": null,
+      "form_type": "HUBSPOT"
+    }
+  },
+  {
+    "name": "product_Slug",
+    "label": "Product Slug",
+    "required": false,
+    "locked": false,
+    "validation_regex": "",
+    "allow_new_line": false,
+    "show_emoji_picker": false,
+    "type": "text",
+    "default": "ikhokha-register-shaker"
+  },
+  {
+    "name": "product_id",
+    "label": "Product Id",
+    "required": false,
+    "locked": false,
+    "validation_regex": "",
+    "allow_new_line": false,
+    "show_emoji_picker": false,
+    "type": "text",
+    "default": "1740530286650"
+  },
+  {
+    "name": "PortalId",
+    "label": "PortalId",
+    "required": false,
+    "locked": false,
+    "validation_regex": "",
+    "allow_new_line": false,
+    "show_emoji_picker": false,
+    "type": "text",
+    "default": "20363859"
+  },
+  {
+    "name": "product_description",
+    "label": "Product description",
+    "required": false,
+    "locked": false,
+    "validation_regex": "",
+    "allow_new_line": false,
+    "show_emoji_picker": false,
+    "type": "text",
+    "default": "Accept card payments on-the-go with this Bluetooth connected card machine."
+  },
+  {
+    "name": "Sim_text",
+    "label": "Sim text",
+    "required": false,
+    "locked": false,
+    "validation_regex": "",
+    "allow_new_line": false,
+    "show_emoji_picker": false,
+    "type": "text",
+    "default": "Included"
+  },
+  {
+    "name": "Prepaid_bg_img",
+    "label": "Prepaid Background Image",
+    "required": false,
+    "locked": false,
+    "responsive": true,
+    "resizable": true,
+    "show_loading": false,
+    "type": "image",
+    "default": {
+      "size_type": "auto",
+      "src": "https://f.hubspotusercontent40.net/hubfs/6412394/raw_assets/public/iKhokha_July2021/images/5fb0cde0d183e43f33894d1c_Pattern_BG1-01.png",
+      "alt": null,
+      "loading": "disabled"
+    }
+  },
+  {
+    "name": "product_img",
+    "label": "Prepaid Product Image",
+    "required": false,
+    "locked": false,
+    "responsive": true,
+    "resizable": true,
+    "show_loading": false,
+    "type": "image",
+    "default": {
+      "size_type": "auto",
+      "src": "https://f.hubspotusercontent40.net/hubfs/6412394/iKhokha_July2021/Image/5fb0cde0d183e43dd5894d21_iK_Vend-phone_hand-p-500.png",
+      "alt": null,
+      "loading": "disabled"
+    }
+  },
+  {
+    "name": "prepaid_product_logos",
+    "label": "Prepaid Product Logos",
+    "required": false,
+    "locked": false,
+    "responsive": true,
+    "resizable": true,
+    "show_loading": false,
+    "type": "image",
+    "default": {
+      "size_type": "auto",
+      "src": "https://f.hubspotusercontent40.net/hubfs/6412394/PrepaidProductsLogo.png",
+      "alt": null,
+      "loading": "disabled"
+    }
+  },
+  {
+    "name": "PrepaidProducts_heading",
+    "label": "Prepaid Products heading",
+    "required": false,
+    "locked": false,
+    "validation_regex": "",
+    "allow_new_line": false,
+    "show_emoji_picker": false,
+    "type": "text",
+    "default": "What can you sell with IK Vend"
+  },
+  {
+    "name": "PrepaidProducts_Subheading",
+    "label": "Prepaid Products Sub heading",
+    "required": false,
+    "locked": false,
+    "validation_regex": "",
+    "allow_new_line": false,
+    "show_emoji_picker": false,
+    "type": "text",
+    "default": "Need capital for your business?"
+  },
+  {
+    "name": "PrepaidProducts_paragraph",
+    "label": "Prepaid Products Paragraph",
+    "required": false,
+    "locked": false,
+    "validation_regex": "",
+    "allow_new_line": false,
+    "show_emoji_picker": false,
+    "type": "text",
+    "default": "With iK Vend, you can sell prepaid products directly to your customers using the iKhokha app and your iKhokha Mover Pro or Shaker Duo."
+  },
+
+  {
+    "children": [
+      {
+        "choices": [
+          ["standard", "Standard"],
+          ["cta", "CTA"],
+          ["popup", "Popup"],
+          ["link", "Link"]
+        ],
+        "display": "select",
+        "label": "Button type",
+        "locked": false,
+        "name": "button_type",
+        "required": false,
+        "type": "choice",
+        "oldId": "4630f4e1-a031-1917-1890-4608566bbcdf",
+        "id": "c9d878ea-4aa7-f721-cf74-37d1b3bcc5be"
+      },
+      {
+        "allow_new_line": false,
+        "label": "Button text",
+        "locked": false,
+        "name": "button_text",
+        "required": false,
+        "show_emoji_picker": false,
+        "type": "text",
+        "validation_regex": "",
+        "visibility": {
+          "controlling_field": "c9d878ea-4aa7-f721-cf74-37d1b3bcc5be",
+          "controlling_value_regex": "standard|popup|link",
+          "operator": "MATCHES_REGEX"
+        },
+        "oldId": "edc5763e-a19e-aa2e-9ed6-14d406d43c65",
+        "id": "86a4d9e9-9f66-bbee-6752-26145fa734da"
+      },
+      {
+        "default": {
+          "url": {
+            "content_id": null,
+            "type": "EXTERNAL",
+            "href": ""
+          },
+          "open_in_new_tab": false,
+          "no_follow": false
+        },
+        "label": "button_link",
+        "locked": false,
+        "name": "button_link",
+        "required": false,
+        "show_advanced_rel_options": false,
+        "supported_types": [
+          "EXTERNAL",
+          "CONTENT",
+          "FILE",
+          "EMAIL_ADDRESS",
+          "BLOG"
+        ],
+        "type": "link",
+        "visibility": {
+          "controlling_field": "c9d878ea-4aa7-f721-cf74-37d1b3bcc5be",
+          "controlling_value_regex": "standard",
+          "operator": "EQUAL"
+        },
+        "oldId": "423a0c51-2bbb-c22e-61d1-5c040a045f9f",
+        "id": "666fe2dc-da80-d9e2-d13e-fc3d1669e794"
+      },
+      {
+        "default": {
+          "url": {
+            "content_id": null,
+            "type": "EXTERNAL",
+            "href": ""
+          },
+          "open_in_new_tab": false,
+          "no_follow": false
+        },
+        "label": "link",
+        "locked": false,
+        "name": "link",
+        "required": false,
+        "show_advanced_rel_options": false,
+        "supported_types": [
+          "EXTERNAL",
+          "CONTENT",
+          "FILE",
+          "EMAIL_ADDRESS",
+          "BLOG"
+        ],
+        "type": "link",
+        "visibility": {
+          "controlling_field": "c9d878ea-4aa7-f721-cf74-37d1b3bcc5be",
+          "controlling_value_regex": "link",
+          "operator": "EQUAL"
+        },
+        "oldId": "ea0d7365-d519-c500-e941-41880dc5f120",
+        "id": "3dd9bb13-a12d-d7f4-37db-6689e8c413e6"
+      },
+      {
+        "label": "Select CTA",
+        "locked": false,
+        "name": "select_cta",
+        "required": false,
+        "type": "cta",
+        "visibility": {
+          "controlling_field": "c9d878ea-4aa7-f721-cf74-37d1b3bcc5be",
+          "controlling_value_regex": "cta",
+          "operator": "EQUAL"
+        },
+        "oldId": "58ba0b94-ec45-05df-eeb7-40622af0740f",
+        "id": "b80568b2-517b-fde8-d7a0-f4fb85d0beb2"
+      }
+    ],
+    "default": {
+      "button_link": {
+        "url": {
+          "content_id": null,
+          "type": "EXTERNAL",
+          "href": ""
+        },
+        "open_in_new_tab": false,
+        "no_follow": false
+      },
+      "link": {
+        "url": {
+          "content_id": null,
+          "type": "EXTERNAL",
+          "href": ""
+        },
+        "open_in_new_tab": false,
+        "no_follow": false
+      }
+    },
+    "expanded": false,
+    "label": "Prepaid Products button item",
+    "locked": false,
+    "name": "prepaidproducts_button_item",
+    "occurrence": {},
+    "required": false,
+    "tab": "CONTENT",
+    "type": "group",
+    "oldId": "f8d4fa34-8231-efdf-c042-28b3aee6103c",
+    "id": "b88e2f2f-0071-edf7-3f88-5af1e3a0548c"
+  },
+
+  {
+    "name": "Free_delivery_text",
+    "label": "Free delivery text",
+    "required": false,
+    "locked": false,
+    "validation_regex": "",
+    "allow_new_line": false,
+    "show_emoji_picker": false,
+    "type": "text",
+    "default": "Free delivery countrywide"
+  },
+  {
+    "name": "Free_delivery_icon",
+    "label": "Free delivery icon",
+    "required": false,
+    "locked": false,
+    "responsive": true,
+    "resizable": true,
+    "show_loading": false,
+    "type": "image",
+    "default": {
+      "size_type": "auto",
+      "src": "https://f.hubspotusercontent40.net/hubfs/6412394/Maker.svg",
+      "alt": null,
+      "loading": "disabled"
+    }
+  },
+  {
+    "type": "group",
+    "id": "b4c5a6c5-12da-5d1b-0eef-f609e379c4fb",
+    "label": "General Info",
+    "children": [
+      {
+        "type": "text",
+        "id": "e742ed0b-1150-bc00-ec6c-3e9547df0ba8",
+        "validation_regex": "",
+        "label": "General Info text",
+        "name": "general_info_text"
+      },
+      {
+        "type": "image",
+        "id": "89779cdf-b1e2-e54a-1429-f873ecda809c",
+        "default": {
+          "size_type": "auto",
+          "src": "",
+          "alt": null,
+          "loading": "lazy"
+        },
+        "resizable": true,
+        "responsive": true,
+        "show_loading": false,
+        "label": "General Info Image",
+        "name": "general_info_image"
+      }
+    ],
+    "name": "general_info",
+    "default": {
+      "general_info_image": {
+        "size_type": "auto",
+        "src": "",
+        "alt": null,
+        "loading": "lazy"
+      }
+    },
+    "occurrence": {}
+  },
+  {
+    "name": "Payment_logos",
+    "label": "Payment logos",
+    "required": false,
+    "locked": false,
+    "responsive": true,
+    "resizable": true,
+    "show_loading": false,
+    "type": "image",
+    "default": {
+      "size_type": "auto",
+      "src": "https://f.hubspotusercontent40.net/hubfs/6412394/payment-logos.png",
+      "alt": null,
+      "loading": "disabled"
+    }
+  },
+  {
+    "type": "group",
+    "id": "698b38e0-73b9-30c0-5924-5a01f73b793d",
+    "label": "Delivered information",
+    "children": [
+      {
+        "type": "image",
+        "id": "29c5a755-4583-4e7e-0b30-db8cefadc8d2",
+        "default": {
+          "size_type": "auto",
+          "src": "https://f.hubspotusercontent40.net/hubfs/6412394/truck.svg",
+          "alt": "truck",
+          "loading": "lazy",
+          "width": 45,
+          "height": 36,
+          "max_width": 45,
+          "max_height": 36
+        },
+        "resizable": true,
+        "responsive": true,
+        "show_loading": false,
+        "label": "Icon",
+        "name": "icon"
+      },
+      {
+        "type": "text",
+        "id": "3bb32ec7-ece5-2c01-0cd8-0b14c0c5794b",
+        "validation_regex": "",
+        "label": "text",
+        "name": "text",
+        "default": "Delivery within 3 – 4 working days"
+      }
+    ],
+    "name": "Delivered_information",
+    "default": {
+      "icon": {
+        "size_type": "auto",
+        "src": "https://f.hubspotusercontent40.net/hubfs/6412394/truck.svg",
+        "alt": "truck",
+        "loading": "lazy",
+        "width": 45,
+        "height": 36,
+        "max_width": 45,
+        "max_height": 36
+      },
+      "text": "Delivery within 3 – 4 working days"
+    },
+    "occurrence": {
+      "sorting_label_field": "3bb32ec7-ece5-2c01-0cd8-0b14c0c5794b"
+    }
+  },
+  {
+    "type": "group",
+    "id": "1b2e5953-0274-d4de-4bdd-4649090462f4",
+    "label": "Product Information",
+    "children": [
+      {
+        "type": "text",
+        "id": "af5067be-f7c7-84ee-cd08-c820884e7882",
+        "validation_regex": "",
+        "label": "Product Information heading",
+        "name": "product_information_heading",
+        "default": "Get to Know the Shaker Solo"
+      },
+      {
+        "type": "group",
+        "id": "5af189ce-a4da-5bc7-8316-8c2603765a27",
+        "label": "Product Information text",
+        "children": [
+          {
+            "type": "text",
+            "validation_regex": "",
+            "label": "Product Information text Item",
+            "name": "product_information_text_item",
+            "default": "Trade anytime, anywhere with this portable card machine",
+            "oldId": "af5067be-f7c7-84ee-cd08-c820884e7882",
+            "id": "9392f940-f25d-f762-a2f1-cce5d8a55787"
+          }
+        ],
+        "name": "product_information_text",
+        "default": {
+          "product_information_text_item": "Trade anytime, anywhere with this portable card machine"
+        },
+        "occurrence": {}
+      }
+    ],
+    "name": "product_information",
+    "default": {
+      "product_information_heading": "Get to Know the Shaker Solo",
+      "product_information_text": {
+        "product_information_text_item": "Trade anytime, anywhere with this portable card machine"
+      }
+    },
+    "occurrence": {}
+  },
+  {
+    "name": "product_video",
+    "label": "Product video",
+    "required": false,
+    "locked": false,
+    "supported_source_types": ["html"],
+    "supported_oembed_types": ["video"],
+    "type": "embed",
+    "default": {
+      "source_type": "oembed"
+    }
+  },
+
+  {
+    "type": "group",
+    "id": "7d728d7b-ac0e-45f3-7f1f-934ec2de81b5",
+    "label": "Prepaid Product",
+    "children": [
+      {
+        "type": "text",
+        "id": "dfb32c5b-fd30-6873-4f86-b1340b697fe0",
+        "validation_regex": "",
+        "label": "Prepaid Product item",
+        "name": "prepaid_product_item",
+        "default": "Airtime"
+      },
+      {
+        "type": "image",
+        "id": "ed5b1dd9-4082-a529-3e4b-f24ccf0ad34b",
+        "default": {
+          "size_type": "auto",
+          "src": "https://f.hubspotusercontent40.net/hubfs/6412394/iKhokha_July2021/Image/5fab52daeb3297dcf4e81683_tick.svg",
+          "alt": "5fab52daeb3297dcf4e81683_tick",
+          "loading": "lazy",
+          "width": 20,
+          "height": 15,
+          "max_width": 20,
+          "max_height": 15
+        },
+        "resizable": true,
+        "responsive": true,
+        "show_loading": false,
+        "label": "Prepaid Product Image",
+        "name": "prepaid_product_image"
+      }
+    ],
+    "name": "prepaid_product",
+    "default": {
+      "prepaid_product_item": "Airtime",
+      "prepaid_product_image": {
+        "size_type": "auto",
+        "src": "https://f.hubspotusercontent40.net/hubfs/6412394/iKhokha_July2021/Image/5fab52daeb3297dcf4e81683_tick.svg",
+        "alt": "5fab52daeb3297dcf4e81683_tick",
+        "loading": "lazy",
+        "width": 20,
+        "height": 15,
+        "max_width": 20,
+        "max_height": 15
+      }
+    },
+    "occurrence": {}
+  }
+]

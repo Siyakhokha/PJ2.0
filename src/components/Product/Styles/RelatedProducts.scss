@@ -1,0 +1,188 @@
+.RelatedProducts
+{
+    overflow: hidden;
+    position: relative;
+        background-color: #f7f7f7;
+    margin-top: 0!important;
+    padding-top: 64px;
+    padding-bottom: 40px;
+    text-align: center;
+
+
+    h3{
+    margin-top: 0;
+    font-family: 'Baloo 2',sans-serif;
+    color: #000!important;
+    font-size: 25px;
+    font-weight: 800!important;
+    letter-spacing: 0!important;
+}
+    h4{
+      text-align: left;
+    color: #000;
+    font-size: 24px;
+    letter-spacing: -1.12px;
+    font-family: Roboto,sans-serif;
+    font-weight: 800;
+    line-height: 28px;
+    margin-bottom: 10px;
+}
+p{
+    color: #df2c4f!important;
+    font-size: 24px;
+        font-family: Roboto,sans-serif;
+    line-height: 20px;
+    font-weight: 500;
+    text-align: left;
+
+
+}
+
+img {
+    width: 70%;
+    margin: auto;
+}
+
+.RelatedProduct
+{
+  padding: 0 2rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: left;
+    text-align: initial;
+
+    &-info
+    {
+        margin-top: 2.5rem;
+    height: 14rem;
+    }
+    &-btn
+    {
+
+        a {
+        line-height: 1;
+    font-weight: 400;
+    font-family: 'Roboto Bold',sans-serif;
+    display: inline-block;
+    position: relative;
+    letter-spacing: .01em;
+    font-size: 14px;
+    min-height: 40px;
+    background: 0 0;
+    margin: initial!important;
+    font-size: 18px!important;
+    font-weight: 700!important;
+    border-radius: 10px!important;
+    padding: 11px 50px!important;
+    background-color: #fc0;
+    color: #000;
+
+            &:hover
+            {
+                background-color: #df2c4f;
+    color: #f1f1f1;
+            }
+
+
+    }
+}
+}
+
+.slick-prev
+{
+    left: 37px;
+    top:-4%;
+}
+
+.slick-next
+{
+ right: 37px;
+    top:-4%;
+}
+
+.slick-next:before, .slick-prev:before {
+    font-size: 20px;
+    line-height: 1;
+    opacity: .75;
+    color: #000;
+}
+
+.slick-prev:before {
+    content: ' ';
+    background-image: url(https://f.hubspotusercontent40.net/hubfs/6412394/chevron-right-solid.svg);
+}
+.slick-next:before {
+    content: ' ';
+    background-image: url(https://f.hubspotusercontent40.net/hubfs/6412394/chevron-left-solid.svg);
+}
+
+
+}
+
+
+
+@media (max-width: 767.98px) { 
+
+
+    .RelatedProducts
+{
+    
+.slick-prev {
+    left: 19px;
+    top: -14%;
+}
+
+.slick-next {
+    right: 19px;
+    top: -14%;
+}
+
+    h3{
+  
+
+}
+    h4{
+font-size: 5vw;
+line-height: 1.1;
+}
+p{
+    
+          font-size: 4vw;
+          line-height: 1.1;
+
+
+}
+
+img {
+    
+}
+
+.RelatedProduct
+{
+  
+
+    &-info
+    {
+          height: 14rem;  
+    }
+    &-btn
+    {
+
+        a {
+        
+    padding: 11px 20px !important
+
+    }
+}
+}
+
+}
+
+
+
+
+
+
+
+}
+

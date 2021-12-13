@@ -1,0 +1,12 @@
+defaultPortal: ik-shop-checkout
+portals:
+  - name: ik-shop-checkout
+    portalId: 6412394
+    authType: personalaccesskey
+    auth:
+      tokenInfo:
+        accessToken: >-
+          CLrxz5zbLxIOAA0AAAAA4A0DAAAAAEAY6rCHAyChld4EKO7pDDIUf8yxZmRO4f_2c3VQUHfc_s3SnQs6LwAABEEAAAB4AAAAAAAAAAAAAAAAAAAABAAAwAcA_v8xPAAABgAAAGAAAAAAAAAIQhQ0bHRu0BbB3vmbMb_hiO8tjcYzD0oDbmExUgBaAA
+        expiresAt: '2021-12-13T11:35:58.912Z'
+    personalAccessKey: >-
+      CiQxOGQ0ZmE3My03OWM5LTQ2MWItOGE5Ny03Mjc5MWRkZDZjNGQQ6rCHAxihld4EKhkABeaRgvBlU1qec5L4Xbp1ELIwGXsdgwgiSgNuYTE

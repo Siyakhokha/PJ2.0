@@ -1,0 +1,15 @@
+<svg id="Icon" xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19">
+  <g id="Icon_placeholder" data-name="Icon placeholder">
+    <g id="invisible_box" data-name="invisible box">
+      <rect id="Rectangle_27882" data-name="Rectangle 27882" width="16" height="19" fill="none"/>
+    </g>
+  </g>
+  <g id="Icon_Edit_16x16" data-name="Icon Edit 16x16" transform="translate(0 2)">
+    <g id="invisible_box-2" data-name="invisible box">
+      <rect id="Rectangle_28195" data-name="Rectangle 28195" width="16" height="16" fill="none"/>
+    </g>
+    <g id="Paths" transform="translate(1.334 1.334)">
+      <path id="Path_339957" data-name="Path 339957" d="M15.128,8.922l-2.7-2.732a.633.633,0,0,0-.933,0l-8.63,8.63a.666.666,0,0,0-.2.466L2,18.651a.666.666,0,0,0,.666.666l3.365-.666a.666.666,0,0,0,.466-.2l8.63-8.6a.633.633,0,0,0,0-.933Zm-9.363,8.4-2.432.666L4,15.553l6.164-6.131L11.9,11.188Zm7.1-7.064L11.1,8.489l.866-.9,1.766,1.8Z" transform="translate(-2 -5.985)" fill="#09828b"/>
+    </g>
+  </g>
+</svg>

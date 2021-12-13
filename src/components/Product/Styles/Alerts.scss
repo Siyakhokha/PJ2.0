@@ -1,0 +1,25 @@
+.alerts
+{
+    height: 80vh;
+    margin: auto;
+    position: relative;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  
+    p{
+    font-family: 'Roboto',sans-serif;
+    font-size: 18px;
+    line-height: 1.1;
+    font-weight: 400;
+    letter-spacing: -1px;
+    color: #000;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    }
+}
