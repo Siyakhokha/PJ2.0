@@ -8,6 +8,38 @@ h3 {
   font-family: Roboto;
 }
 
+.ik-shop-checkout__container
+  section.form-container
+  .input-item
+  input::-webkit-input-placeholder,
+.ik-shop-checkout__container
+  section.form-container
+  .input-item
+  select::-webkit-input-placeholder {
+  /* Edge */
+  color: #c6c3c3;
+}
+.ik-shop-checkout__container
+  section.form-container
+  .input-item
+  select::-webkit-input-placeholder,
+.ik-shop-checkout__container
+  section.form-container
+  .input-item
+  input::-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #c6c3c3;
+}
+.ik-shop-checkout__container
+  section.form-container
+  .input-item
+  select::placeholder,
+.ik-shop-checkout__container
+  section.form-container
+  .input-item
+  input::placeholder {
+  color: #c6c3c3;
+}
 .ik-shop-checkout__container {
   .capture-view {
     display: grid;
@@ -434,7 +466,7 @@ h3 {
  * Dot Pulse
  * ==============================================
  */
-
+  .select-item.suburb,
   .select-item.city {
     position: relative;
   }

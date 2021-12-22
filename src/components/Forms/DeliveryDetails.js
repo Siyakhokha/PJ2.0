@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Select from 'react-select';
 import { customStyles } from '../SelectCustomStyles/SelectCustomStyles';
@@ -11,26 +11,59 @@ const DeliveryDetails = ({
   ramData,
   setRamData,
   formDataObject,
+
+  canSetNextBtnActive,
 }) => {
   const [selectedZone, setSelectedZone] = useState(null);
+  const [Province, setProvince] = useState(null);
+
+  useEffect(() => {
+    if (formDataObject.current.province.value) {
+      provinceSelect({ value: formDataObject.current.province.value });
+    }
+  }, []);
+
   const setSelectedRamZoneId = item => {
-    deliveryDetailsRef.current.querySelector('input[name="city"]').value =
-      item.suburb;
+    if (item.area) {
+      formDataObject.current.city.value = item.area;
+      formDataObject.current.postalcode.value = `${item.postalCode}`;
+      formDataObject.current.suburb.value = `${item.suburb}`;
+      formDataObject.current['city'].isValid = true;
+      formDataObject.current['postalcode'].isValid = true;
+      formDataObject.current['suburb'].isValid = true;
+      // deliveryDetailsRef.current.querySelector('input[name="city"]').value =
+      //   item.area;
+      deliveryDetailsRef.current.querySelector('input[name="suburb"]').value =
+        item.suburb;
+
+      deliveryDetailsRef.current.querySelector(
+        'input[name="postalcode"]',
+      ).value = item.postalCode;
+    }
 
     deliveryDetailsRef.current.querySelector('input[name="suburb"]').value =
-      item.area;
+      item.suburb;
 
     deliveryDetailsRef.current.querySelector('input[name="postalcode"]').value =
       item.postalCode;
-
+    formDataObject.current['postalcode'].isValid = true;
+    formDataObject.current['suburb'].isValid = true;
     setRamData(null);
+
+    formDataObject.current.ramZoneId.value = item.ramZoneId;
+    formDataObject.current.ramZoneId.isValid = true;
 
     //console.log(item.ramZoneId);
   };
 
   const provinceSelect = input => {
+    console.log(input);
     formDataObject.current['province'].value = input.value;
     formDataObject.current['province'].isValid = true;
+    setProvince(formDataObject.current.province.value);
+    formDataObject.current['postalcode'].isValid = true;
+    formDataObject.current['suburb'].isValid = true;
+    canSetNextBtnActive();
   };
 
   return (
@@ -58,7 +91,7 @@ const DeliveryDetails = ({
           id="complexBuilding"
           placeholder="Type in here"
           defaultValue={formDataObject.current.complexBuilding.value}
-          onBlur={event => fieldDetailsValid(event)}
+          // onBlur={event => fieldDetailsValid(event)}
         />
         <div className="errorMsg">
           <img src={warningtriangle} alt="error" />
@@ -73,7 +106,7 @@ const DeliveryDetails = ({
           type="text"
           name="streetAddress"
           id="streetAddress"
-          placeholder="Eg. 1 Nokwe Ave, Umhlanga"
+          placeholder="1 Nokwe Ave, Umhlanga"
           required
           onBlur={event => fieldDetailsValid(event)}
           defaultValue={formDataObject.current.streetAddress.value}
@@ -82,6 +115,51 @@ const DeliveryDetails = ({
           <img src={warningtriangle} alt="error" />
           <span>Please type in your Street Address*</span>
         </div>
+      </div>
+
+      <div className="input-item select-item suburb">
+        <label for="suburb">Suburb</label>
+        <input
+          type="text"
+          name="suburb"
+          id="suburb"
+          required
+          autoComplete="nope"
+          onKeyUpCapture={event => fieldDetailsValid(event)}
+          defaultValue={formDataObject.current.suburb.value}
+        />
+        {showElipsis && (
+          <div className="pulse-container">
+            <div className="dot-pulse"></div>
+          </div>
+        )}
+      </div>
+      {ramData !== null && (
+        <div className="suburbs-list-block">
+          <span>Please select...</span>
+          {ramData.map(item => (
+            <div
+              className="zone-item"
+              onClick={() => setSelectedRamZoneId(item)}
+            >
+              {item.suburb && `${item.suburb} - `}
+              {item.area && `${item.area} - `}
+              {item.postalCode && item.postalCode}
+            </div>
+          ))}
+        </div>
+      )}
+      <div className="input-item select-item city">
+        <label for="city">City</label>
+        <input
+          type="text"
+          name="city"
+          id="city"
+          required
+          autoComplete="nope"
+          defaultValue={formDataObject.current.city.value}
+          onBlur={event => fieldDetailsValid(event)}
+        />
       </div>
       <div className="input-item select-item province">
         <label for="province">Province</label>
@@ -99,54 +177,9 @@ const DeliveryDetails = ({
           ]}
           styles={customStyles}
           onChange={value => provinceSelect(value)}
-          defaultValue={formDataObject.current.province.value}
+          defaultValue={Province}
         />
       </div>
-      <div className="input-item select-item city">
-        <label for="city">City</label>
-        <input
-          type="text"
-          name="city"
-          id="city"
-          required
-          autoComplete="nope"
-          defaultValue={formDataObject.current.city.value}
-          onBlur={event => fieldDetailsValid(event)}
-        />
-        {showElipsis && (
-          <div className="pulse-container">
-            <div className="dot-pulse"></div>
-          </div>
-        )}
-      </div>
-
-      {ramData !== null && (
-        <div className="suburbs-list-block">
-          <span>Please select...</span>
-          {ramData.map(item => (
-            <div
-              className="zone-item"
-              onClick={() => setSelectedRamZoneId(item)}
-            >
-              {item.suburb}
-            </div>
-          ))}
-        </div>
-      )}
-
-      <div className="input-item select-item suburb">
-        <label for="suburb">Suburb</label>
-        <input
-          type="text"
-          name="suburb"
-          id="suburb"
-          required
-          autoComplete="nope"
-          onBlur={event => fieldDetailsValid(event)}
-          defaultValue={formDataObject.current.suburb.value}
-        />
-      </div>
-
       <div className="input-item postalcode">
         <label for="postalcode" className="required">
           Postal Code
@@ -155,9 +188,9 @@ const DeliveryDetails = ({
           type="text"
           name="postalcode"
           id="postalcode"
-          placeholder="Eg. 4319"
+          placeholder="4319"
           required
-          onBlur={event => fieldDetailsValid(event)}
+          onKeyUpCapture={event => fieldDetailsValid(event)}
           defaultValue={formDataObject.current.postalcode.value}
         />
         <div className="errorMsg">

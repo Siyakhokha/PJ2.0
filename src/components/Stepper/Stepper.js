@@ -22,13 +22,9 @@ const Stepper = ({ step }) => {
     return ref.current;
   };
 
-  console.log(stepToPersonalDetails, step);
-
   let prevStep = usePrevious(step);
 
   useEffect(() => {
-    console.log('step:', step);
-    console.log('prevStep:', prevStep);
     prevSetRef.current = step;
 
     if (step > prevStep && !stepToPersonalDetails) {

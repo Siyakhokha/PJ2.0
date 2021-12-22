@@ -56,14 +56,14 @@ const PersonalDetails = ({
           type="email"
           name="email"
           id="email"
-          placeholder="Eg. Jimmy@gmail.com"
+          placeholder="Jimmy@gmail.com"
           required
           onBlur={event => fieldDetailsValid(event)}
           defaultValue={formDataObject.current.email.value}
         />
         <div className="errorMsg">
           <img src={warningtriangle} alt="error" />
-          <span>Please type in your email</span>
+          <span>Please type in a valid email</span>
         </div>
       </div>
       <div className="input-item confirmEmail">
@@ -74,14 +74,14 @@ const PersonalDetails = ({
           type="email"
           name="confirmEmail"
           id="confirmEmail"
-          placeholder="Eg. Jimmy@gmail.com"
+          placeholder="Jimmy@gmail.com"
           required
-          onBlur={event => fieldDetailsValid(event)}
+          onKeyUpCapture={event => fieldDetailsValid(event)}
           defaultValue={formDataObject.current.confirmEmail.value}
         />
         <div className="errorMsg">
           <img src={warningtriangle} alt="error" />
-          <span>Please type in your email</span>
+          <span>The email addresses do not match</span>
         </div>
       </div>
       <div className="input-item cellNumber">
@@ -94,7 +94,7 @@ const PersonalDetails = ({
           id="cellNumber"
           placeholder="Eg. 000-000-0000"
           required
-          onBlur={event => fieldDetailsValid(event)}
+          onKeyUpCapture={event => fieldDetailsValid(event)}
           defaultValue={formDataObject.current.cellNumber.value}
         />
         <div className="errorMsg">

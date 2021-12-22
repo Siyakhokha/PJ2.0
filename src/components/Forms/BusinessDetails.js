@@ -39,7 +39,7 @@ const BusinessDetails = ({
           name="complexBuildingbiz"
           id="complexBuildingbiz"
           placeholder="Type in here"
-          onBlur={event => fieldDetailsValid(event)}
+          onKeyUpCapture={event => fieldDetailsValid(event)}
         />
         <div className="errorMsg">
           <img src={warningtriangle} alt="error" />
@@ -54,9 +54,9 @@ const BusinessDetails = ({
           type="text"
           name="streetAddressbiz"
           id="streetAddressbiz"
-          placeholder="Eg. 1 Nokwe Ave, Umhlanga"
+          placeholder="1 Nokwe Ave, Umhlanga"
           required
-          onBlur={event => fieldDetailsValid(event)}
+          onKeyUpCapture={event => fieldDetailsValid(event)}
         />
         <div className="errorMsg">
           <img src={warningtriangle} alt="error" />
@@ -101,7 +101,7 @@ const BusinessDetails = ({
           id="suburbbiz"
           required
           autoComplete="nope"
-          onBlur={event => fieldDetailsValid(event)}
+          onKeyUpCapture={event => fieldDetailsValid(event)}
         />
       </div>
 
@@ -113,9 +113,9 @@ const BusinessDetails = ({
           type="text"
           name="postalcodebiz"
           id="postalcodebiz"
-          placeholder="Eg. 4319"
+          placeholder="4319"
           required
-          onBlur={event => fieldDetailsValid(event)}
+          onKeyUpCapture={event => fieldDetailsValid(event)}
         />
         <div className="errorMsg">
           <img src={warningtriangle} alt="error" />

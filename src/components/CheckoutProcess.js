@@ -62,6 +62,7 @@ const CheckoutProcess = () => {
     suburbbiz: { value: '', isValid: false },
     postalcodebiz: { value: '', isValid: false },
     countrybiz: { value: 'South Africa', isValid: true },
+    ramZoneId: { value: '', isValid: false },
   });
   const personalDetails = useRef(null);
   const personalDetailsMembers = [
@@ -150,14 +151,15 @@ const CheckoutProcess = () => {
       ) {
         setFieldValid(['email', 'confirmEmail']);
       } else {
-        setFieldInValid(['email', 'confirmEmail']);
+        setFieldInValid(['confirmEmail']);
+        console.log('confirmEmail');
       }
     }
 
     //3. city autopopulate trigger event for suburb and postal code
     if (fieldName === 'city') {
-      checkFieldLength('city');
       checkFieldLength('suburb');
+      checkFieldLength('city');
       checkFieldLength('postalcode');
       checkFieldLength('country');
     }
@@ -191,6 +193,7 @@ const CheckoutProcess = () => {
       personalDetails.current
         .querySelector(`.${field}`)
         .classList.remove('inValid');
+      formDataObject.current[field].isValid = true;
     });
   };
 
@@ -199,6 +202,8 @@ const CheckoutProcess = () => {
       personalDetails.current
         .querySelector(`.${field}`)
         .classList.add('inValid');
+      //  formDataObject.current[field].value = field;
+      formDataObject.current[field].isValid = false;
     });
   };
 
@@ -260,17 +265,15 @@ const CheckoutProcess = () => {
       let searchTimer;
 
       deliveryDetails.current.querySelector(
-        'input[name="city"]',
+        'input[name="suburb"]',
       ).onkeyup = function() {
         let searchTerm = deliveryDetails.current.querySelector(
-          'input[name="city"]',
+          'input[name="suburb"]',
         ).value;
-
-        searchTimer = setTimeout(() => getSurburbList(searchTerm), 1000);
+        searchTimer = setTimeout(() => getSurburbList(searchTerm), 800);
       };
-
       deliveryDetails.current.querySelector(
-        'input[name="city"]',
+        'input[name="suburb"]',
       ).onkeydown = function() {
         clearTimeout(searchTimer);
       };
@@ -308,7 +311,7 @@ const CheckoutProcess = () => {
     //go fetch the data using the search term and then set it as state
     //setRamData
     //
-    //axios
+    //axios[]
 
     if (searchTerm !== '' && searchTerm.length > 3) {
       setShowElipsis(true);
@@ -359,6 +362,7 @@ const CheckoutProcess = () => {
               ramData={ramData}
               setRamData={setRamData}
               formDataObject={formDataObject}
+              canSetNextBtnActive={canSetNextBtnActive}
             />
           )}
 

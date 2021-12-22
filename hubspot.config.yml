@@ -1,12 +1,12 @@
-defaultPortal: ik-shop-checkout
+defaultPortal: Pj20
 portals:
-  - name: ik-shop-checkout
-    portalId: 6412394
+  - name: Pj20
+    portalId: 20363859
     authType: personalaccesskey
     auth:
       tokenInfo:
         accessToken: >-
-          CLrxz5zbLxIOAA0AAAAA4A0DAAAAAEAY6rCHAyChld4EKO7pDDIUf8yxZmRO4f_2c3VQUHfc_s3SnQs6LwAABEEAAAB4AAAAAAAAAAAAAAAAAAAABAAAwAcA_v8xPAAABgAAAGAAAAAAAAAIQhQ0bHRu0BbB3vmbMb_hiO8tjcYzD0oDbmExUgBaAA
-        expiresAt: '2021-12-13T11:35:58.912Z'
+          CPD5x43eLxIJAAkAAAAA4A0DGNP02gkg15iPDCju6QwyFCgapOEnqfGydJIYs4945p_7c6YuOigAAABBAAAAeAAAAAAAAAAAAAAAAAAAAAAAAMAHAP7_MTwAAAYAAABgQhQ5oSgHQK6HcIEGNrdTYOWmM3pJ-koDbmExUgBaAA
+        expiresAt: '2021-12-22T10:31:18.006Z'
     personalAccessKey: >-
-      CiQxOGQ0ZmE3My03OWM5LTQ2MWItOGE5Ny03Mjc5MWRkZDZjNGQQ6rCHAxihld4EKhkABeaRgvBlU1qec5L4Xbp1ELIwGXsdgwgiSgNuYTE
+      CiQ2OTg4MThhMy1hMGUyLTRhNGMtODMwNS00ZWI5MzI4NWIyM2YQ0_TaCRjXmI8MKhkABeaRghpURfSYsEqB8AuTJY6xpKX9MVnySgNuYTE

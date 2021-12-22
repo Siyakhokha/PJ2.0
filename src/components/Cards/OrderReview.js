@@ -13,9 +13,9 @@ const OrderReview = ({ goToView, formDataObject }) => {
       {(step == 1 || step == 2) && (
         <div className="card order-review margin-top-20">
           <label>Order Review</label>
-          <button className="card-acc-toggle expanded">
+          {/* <button className="card-acc-toggle expanded">
             <img src={chevron} alt="chevron" />
-          </button>
+          </button> */}
           <div className="order-review-content">
             <section>
               <label>Personal Details</label>

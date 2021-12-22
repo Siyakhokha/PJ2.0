@@ -22788,7 +22788,7 @@ var PersonalDetails_PersonalDetails = function PersonalDetails(_ref) {
     type: "email",
     name: "email",
     id: "email",
-    placeholder: "Eg. Jimmy@gmail.com",
+    placeholder: "Jimmy@gmail.com",
     required: true,
     onBlur: function onBlur(event) {
       return fieldDetailsValid(event);
@@ -22799,7 +22799,7 @@ var PersonalDetails_PersonalDetails = function PersonalDetails(_ref) {
   }, /*#__PURE__*/react_default.a.createElement("img", {
     src: warningtriangle_default.a,
     alt: "error"
-  }), /*#__PURE__*/react_default.a.createElement("span", null, "Please type in your email"))), /*#__PURE__*/react_default.a.createElement("div", {
+  }), /*#__PURE__*/react_default.a.createElement("span", null, "Please type in a valid email"))), /*#__PURE__*/react_default.a.createElement("div", {
     className: "input-item confirmEmail"
   }, /*#__PURE__*/react_default.a.createElement("label", {
     for: "confirmEmail",
@@ -22808,9 +22808,9 @@ var PersonalDetails_PersonalDetails = function PersonalDetails(_ref) {
     type: "email",
     name: "confirmEmail",
     id: "confirmEmail",
-    placeholder: "Eg. Jimmy@gmail.com",
+    placeholder: "Jimmy@gmail.com",
     required: true,
-    onBlur: function onBlur(event) {
+    onKeyUpCapture: function onKeyUpCapture(event) {
       return fieldDetailsValid(event);
     },
     defaultValue: formDataObject.current.confirmEmail.value
@@ -22819,7 +22819,7 @@ var PersonalDetails_PersonalDetails = function PersonalDetails(_ref) {
   }, /*#__PURE__*/react_default.a.createElement("img", {
     src: warningtriangle_default.a,
     alt: "error"
-  }), /*#__PURE__*/react_default.a.createElement("span", null, "Please type in your email"))), /*#__PURE__*/react_default.a.createElement("div", {
+  }), /*#__PURE__*/react_default.a.createElement("span", null, "The email addresses do not match"))), /*#__PURE__*/react_default.a.createElement("div", {
     className: "input-item cellNumber"
   }, /*#__PURE__*/react_default.a.createElement("label", {
     for: "cellNumber",
@@ -22830,7 +22830,7 @@ var PersonalDetails_PersonalDetails = function PersonalDetails(_ref) {
     id: "cellNumber",
     placeholder: "Eg. 000-000-0000",
     required: true,
-    onBlur: function onBlur(event) {
+    onKeyUpCapture: function onKeyUpCapture(event) {
       return fieldDetailsValid(event);
     },
     defaultValue: formDataObject.current.cellNumber.value
@@ -29069,23 +29069,58 @@ var DeliveryDetails_DeliveryDetails = function DeliveryDetails(_ref) {
       showElipsis = _ref.showElipsis,
       ramData = _ref.ramData,
       setRamData = _ref.setRamData,
-      formDataObject = _ref.formDataObject;
+      formDataObject = _ref.formDataObject,
+      canSetNextBtnActive = _ref.canSetNextBtnActive;
 
   var _useState = Object(react["useState"])(null),
       _useState2 = DeliveryDetails_slicedToArray(_useState, 2),
       selectedZone = _useState2[0],
       setSelectedZone = _useState2[1];
 
+  var _useState3 = Object(react["useState"])(null),
+      _useState4 = DeliveryDetails_slicedToArray(_useState3, 2),
+      Province = _useState4[0],
+      setProvince = _useState4[1];
+
+  Object(react["useEffect"])(function () {
+    if (formDataObject.current.province.value) {
+      provinceSelect({
+        value: formDataObject.current.province.value
+      });
+    }
+  }, []);
+
   var setSelectedRamZoneId = function setSelectedRamZoneId(item) {
-    deliveryDetailsRef.current.querySelector('input[name="city"]').value = item.suburb;
-    deliveryDetailsRef.current.querySelector('input[name="suburb"]').value = item.area;
+    if (item.area) {
+      formDataObject.current.city.value = item.area;
+      formDataObject.current.postalcode.value = "".concat(item.postalCode);
+      formDataObject.current.suburb.value = "".concat(item.suburb);
+      formDataObject.current['city'].isValid = true;
+      formDataObject.current['postalcode'].isValid = true;
+      formDataObject.current['suburb'].isValid = true; // deliveryDetailsRef.current.querySelector('input[name="city"]').value =
+      //   item.area;
+
+      deliveryDetailsRef.current.querySelector('input[name="suburb"]').value = item.suburb;
+      deliveryDetailsRef.current.querySelector('input[name="postalcode"]').value = item.postalCode;
+    }
+
+    deliveryDetailsRef.current.querySelector('input[name="suburb"]').value = item.suburb;
     deliveryDetailsRef.current.querySelector('input[name="postalcode"]').value = item.postalCode;
-    setRamData(null); //console.log(item.ramZoneId);
+    formDataObject.current['postalcode'].isValid = true;
+    formDataObject.current['suburb'].isValid = true;
+    setRamData(null);
+    formDataObject.current.ramZoneId.value = item.ramZoneId;
+    formDataObject.current.ramZoneId.isValid = true; //console.log(item.ramZoneId);
   };
 
   var provinceSelect = function provinceSelect(input) {
+    console.log(input);
     formDataObject.current['province'].value = input.value;
     formDataObject.current['province'].isValid = true;
+    setProvince(formDataObject.current.province.value);
+    formDataObject.current['postalcode'].isValid = true;
+    formDataObject.current['suburb'].isValid = true;
+    canSetNextBtnActive();
   };
 
   return /*#__PURE__*/react_default.a.createElement("section", {
@@ -29111,10 +29146,8 @@ var DeliveryDetails_DeliveryDetails = function DeliveryDetails(_ref) {
     name: "complexBuilding",
     id: "complexBuilding",
     placeholder: "Type in here",
-    defaultValue: formDataObject.current.complexBuilding.value,
-    onBlur: function onBlur(event) {
-      return fieldDetailsValid(event);
-    }
+    defaultValue: formDataObject.current.complexBuilding.value // onBlur={event => fieldDetailsValid(event)}
+
   }), /*#__PURE__*/react_default.a.createElement("div", {
     className: "errorMsg"
   }, /*#__PURE__*/react_default.a.createElement("img", {
@@ -29129,7 +29162,7 @@ var DeliveryDetails_DeliveryDetails = function DeliveryDetails(_ref) {
     type: "text",
     name: "streetAddress",
     id: "streetAddress",
-    placeholder: "Eg. 1 Nokwe Ave, Umhlanga",
+    placeholder: "1 Nokwe Ave, Umhlanga",
     required: true,
     onBlur: function onBlur(event) {
       return fieldDetailsValid(event);
@@ -29141,6 +29174,47 @@ var DeliveryDetails_DeliveryDetails = function DeliveryDetails(_ref) {
     src: warningtriangle_default.a,
     alt: "error"
   }), /*#__PURE__*/react_default.a.createElement("span", null, "Please type in your Street Address*"))), /*#__PURE__*/react_default.a.createElement("div", {
+    className: "input-item select-item suburb"
+  }, /*#__PURE__*/react_default.a.createElement("label", {
+    for: "suburb"
+  }, "Suburb"), /*#__PURE__*/react_default.a.createElement("input", {
+    type: "text",
+    name: "suburb",
+    id: "suburb",
+    required: true,
+    autoComplete: "nope",
+    onKeyUpCapture: function onKeyUpCapture(event) {
+      return fieldDetailsValid(event);
+    },
+    defaultValue: formDataObject.current.suburb.value
+  }), showElipsis && /*#__PURE__*/react_default.a.createElement("div", {
+    className: "pulse-container"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "dot-pulse"
+  }))), ramData !== null && /*#__PURE__*/react_default.a.createElement("div", {
+    className: "suburbs-list-block"
+  }, /*#__PURE__*/react_default.a.createElement("span", null, "Please select..."), ramData.map(function (item) {
+    return /*#__PURE__*/react_default.a.createElement("div", {
+      className: "zone-item",
+      onClick: function onClick() {
+        return setSelectedRamZoneId(item);
+      }
+    }, item.suburb && "".concat(item.suburb, " - "), item.area && "".concat(item.area, " - "), item.postalCode && item.postalCode);
+  })), /*#__PURE__*/react_default.a.createElement("div", {
+    className: "input-item select-item city"
+  }, /*#__PURE__*/react_default.a.createElement("label", {
+    for: "city"
+  }, "City"), /*#__PURE__*/react_default.a.createElement("input", {
+    type: "text",
+    name: "city",
+    id: "city",
+    required: true,
+    autoComplete: "nope",
+    defaultValue: formDataObject.current.city.value,
+    onBlur: function onBlur(event) {
+      return fieldDetailsValid(event);
+    }
+  })), /*#__PURE__*/react_default.a.createElement("div", {
     className: "input-item select-item province"
   }, /*#__PURE__*/react_default.a.createElement("label", {
     for: "province"
@@ -29177,48 +29251,7 @@ var DeliveryDetails_DeliveryDetails = function DeliveryDetails(_ref) {
     onChange: function onChange(value) {
       return provinceSelect(value);
     },
-    defaultValue: formDataObject.current.province.value
-  })), /*#__PURE__*/react_default.a.createElement("div", {
-    className: "input-item select-item city"
-  }, /*#__PURE__*/react_default.a.createElement("label", {
-    for: "city"
-  }, "City"), /*#__PURE__*/react_default.a.createElement("input", {
-    type: "text",
-    name: "city",
-    id: "city",
-    required: true,
-    autoComplete: "nope",
-    defaultValue: formDataObject.current.city.value,
-    onBlur: function onBlur(event) {
-      return fieldDetailsValid(event);
-    }
-  }), showElipsis && /*#__PURE__*/react_default.a.createElement("div", {
-    className: "pulse-container"
-  }, /*#__PURE__*/react_default.a.createElement("div", {
-    className: "dot-pulse"
-  }))), ramData !== null && /*#__PURE__*/react_default.a.createElement("div", {
-    className: "suburbs-list-block"
-  }, /*#__PURE__*/react_default.a.createElement("span", null, "Please select..."), ramData.map(function (item) {
-    return /*#__PURE__*/react_default.a.createElement("div", {
-      className: "zone-item",
-      onClick: function onClick() {
-        return setSelectedRamZoneId(item);
-      }
-    }, item.suburb);
-  })), /*#__PURE__*/react_default.a.createElement("div", {
-    className: "input-item select-item suburb"
-  }, /*#__PURE__*/react_default.a.createElement("label", {
-    for: "suburb"
-  }, "Suburb"), /*#__PURE__*/react_default.a.createElement("input", {
-    type: "text",
-    name: "suburb",
-    id: "suburb",
-    required: true,
-    autoComplete: "nope",
-    onBlur: function onBlur(event) {
-      return fieldDetailsValid(event);
-    },
-    defaultValue: formDataObject.current.suburb.value
+    defaultValue: Province
   })), /*#__PURE__*/react_default.a.createElement("div", {
     className: "input-item postalcode"
   }, /*#__PURE__*/react_default.a.createElement("label", {
@@ -29228,9 +29261,9 @@ var DeliveryDetails_DeliveryDetails = function DeliveryDetails(_ref) {
     type: "text",
     name: "postalcode",
     id: "postalcode",
-    placeholder: "Eg. 4319",
+    placeholder: "4319",
     required: true,
-    onBlur: function onBlur(event) {
+    onKeyUpCapture: function onKeyUpCapture(event) {
       return fieldDetailsValid(event);
     },
     defaultValue: formDataObject.current.postalcode.value
@@ -29286,7 +29319,7 @@ var BusinessDetails_BusinessDetails = function BusinessDetails(_ref) {
     name: "complexBuildingbiz",
     id: "complexBuildingbiz",
     placeholder: "Type in here",
-    onBlur: function onBlur(event) {
+    onKeyUpCapture: function onKeyUpCapture(event) {
       return fieldDetailsValid(event);
     }
   }), /*#__PURE__*/react_default.a.createElement("div", {
@@ -29303,9 +29336,9 @@ var BusinessDetails_BusinessDetails = function BusinessDetails(_ref) {
     type: "text",
     name: "streetAddressbiz",
     id: "streetAddressbiz",
-    placeholder: "Eg. 1 Nokwe Ave, Umhlanga",
+    placeholder: "1 Nokwe Ave, Umhlanga",
     required: true,
-    onBlur: function onBlur(event) {
+    onKeyUpCapture: function onKeyUpCapture(event) {
       return fieldDetailsValid(event);
     }
   }), /*#__PURE__*/react_default.a.createElement("div", {
@@ -29373,7 +29406,7 @@ var BusinessDetails_BusinessDetails = function BusinessDetails(_ref) {
     id: "suburbbiz",
     required: true,
     autoComplete: "nope",
-    onBlur: function onBlur(event) {
+    onKeyUpCapture: function onKeyUpCapture(event) {
       return fieldDetailsValid(event);
     }
   })), /*#__PURE__*/react_default.a.createElement("div", {
@@ -29385,9 +29418,9 @@ var BusinessDetails_BusinessDetails = function BusinessDetails(_ref) {
     type: "text",
     name: "postalcodebiz",
     id: "postalcodebiz",
-    placeholder: "Eg. 4319",
+    placeholder: "4319",
     required: true,
-    onBlur: function onBlur(event) {
+    onKeyUpCapture: function onKeyUpCapture(event) {
       return fieldDetailsValid(event);
     }
   }), /*#__PURE__*/react_default.a.createElement("div", {
@@ -29481,7 +29514,6 @@ var BillingAddressToggle_BillingAddressToggle = function BillingAddressToggle(_r
 /* harmony default export */ var components_Cards_BillingAddressToggle = (BillingAddressToggle_BillingAddressToggle);
 // EXTERNAL MODULE: ./src/images/chevron.svg
 var chevron = __webpack_require__(210);
-var chevron_default = /*#__PURE__*/__webpack_require__.n(chevron);
 
 // EXTERNAL MODULE: ./src/images/edit-pencil.svg
 var edit_pencil = __webpack_require__(143);
@@ -29511,12 +29543,7 @@ var OrderReview_OrderReview = function OrderReview(_ref) {
 
   return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, (step == 1 || step == 2) && /*#__PURE__*/react_default.a.createElement("div", {
     className: "card order-review margin-top-20"
-  }, /*#__PURE__*/react_default.a.createElement("label", null, "Order Review"), /*#__PURE__*/react_default.a.createElement("button", {
-    className: "card-acc-toggle expanded"
-  }, /*#__PURE__*/react_default.a.createElement("img", {
-    src: chevron_default.a,
-    alt: "chevron"
-  })), /*#__PURE__*/react_default.a.createElement("div", {
+  }, /*#__PURE__*/react_default.a.createElement("label", null, "Order Review"), /*#__PURE__*/react_default.a.createElement("div", {
     className: "order-review-content"
   }, /*#__PURE__*/react_default.a.createElement("section", null, /*#__PURE__*/react_default.a.createElement("label", null, "Personal Details"), (step == 1 || step == 2) && /*#__PURE__*/react_default.a.createElement("button", {
     className: "edit-actions",
@@ -29646,11 +29673,8 @@ var Stepper_Stepper_Stepper = function Stepper(_ref) {
     return ref.current;
   };
 
-  console.log(stepToPersonalDetails, step);
   var prevStep = usePrevious(step);
   Object(react["useEffect"])(function () {
-    console.log('step:', step);
-    console.log('prevStep:', prevStep);
     prevSetRef.current = step;
 
     if (step > prevStep && !stepToPersonalDetails) {
@@ -29703,7 +29727,7 @@ var trolley_default = /*#__PURE__*/__webpack_require__.n(trolley);
 
 // CONCATENATED MODULE: ./src/utils/ValidateEmail.js
 var ValidateEmail = function ValidateEmail(email) {
-  var mailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  var mailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   if (mailRegex.test(email)) {
     return true;
@@ -29789,6 +29813,7 @@ var completeOrder_completeOrder = function completeOrder(formDataObject, quantit
       lineItems: lineItems,
       shippingAddress: {
         address1: formDataObject.current.streetAddress.value,
+        address2: formDataObject.current.complexBuilding.value,
         city: formDataObject.current.city.value,
         country: formDataObject.current.country.value,
         firstName: formDataObject.current.firstName.value,
@@ -29811,35 +29836,33 @@ var completeOrder_completeOrder = function completeOrder(formDataObject, quantit
     };
   }
 
-  console.log(orderDetails);
-
-  var AddToCart_mp = function AddToCart_mp(id) {
+  var AddToCart_mp = function AddToCart_mp(id, url) {
     var identityRequest = {
       userIdentities: {
-        email: formDataObject.current.email.value,
-        //customerid: "123",
-        mobile_number: '+27782521743'
+        email: formDataObject.current.email.value //customerid: "123",
+
       }
     };
 
-    var identityCallback = function identityCallback(result) {
+    var identityCallback = function identityCallback() {
       // 1. Create the product
       // eslint-disable-next-line no-undef
       var product1 = mParticle.eCommerce.createProduct(data.productByHandle.title, // Name
       '123', // SKU
       parseInt(Total), // Price
       parseInt(quantity), // Quantity
-      'Card Machines', 'card-machines', 'iKhokha', parseInt(quantity), '0000', '0000', '0000'); // 2. Summarize the transactionFF
+      'Card Machines', 'card-machines', 'iKhokha', 1, '0000', '0000', '0000'); // 2. Summarize the transactionFF
 
       var transactionAttributes = {
         Id: id,
         Revenue: parseInt(Total),
         Tax: parseInt(Taxes),
         Shipping: 100,
-        Step: 2
+        Step: 1
       }; // 3. Log the purchase event (optional custom attributes an custom flags depending on your );
 
       var customAttributes = {
+        cart_url: url,
         event_source: 'Online',
         cart_total: parseInt(Total),
         currency_code: 'ZAR'
@@ -29856,10 +29879,68 @@ var completeOrder_completeOrder = function completeOrder(formDataObject, quantit
     mParticle.Identity.identify(identityRequest, identityCallback);
   };
 
+  var Checkout_mp = function Checkout_mp(id, url) {
+    var identityRequest = {
+      userIdentities: {
+        email: formDataObject.current.email.value //customerid: "123",
+
+      }
+    };
+
+    var identityCallback = function identityCallback() {
+      // 1. Create the product
+      // eslint-disable-next-line no-undef
+      // eslint-disable-next-line no-undef
+      var product1 = mParticle.eCommerce.createProduct(data.productByHandle.title, // Name
+      '123', // SKU
+      parseInt(Total), // Price
+      parseInt(quantity), // Quantity
+      'Card Machines', 'card-machines', 'iKhokha', 1, '0000', '0000', '0000'); // 2. Summarize the transactionFF
+
+      var transactionAttributes = {
+        Id: id,
+        Revenue: parseInt(Total),
+        Tax: parseInt(Taxes),
+        Shipping: 100,
+        Step: 2
+      }; // 3. Log the purchase event (optional custom attributes an custom flags depending on your );
+
+      var customAttributes = {
+        cart_url: url,
+        event_source: 'Online',
+        company_name: formDataObject.current.firstName.value,
+        sub_total: parseInt(Total - Taxes),
+        cart_total: parseInt(Total),
+        currency_code: 'ZAR',
+        discount_code: '000',
+        discount_amount: 0,
+        billing_address_changed: false,
+        billing_address: formDataObject.current.streetAddress.value,
+        billing_zip: formDataObject.current.postalcode.value,
+        billing_city: formDataObject.current.city.value,
+        billing_state: formDataObject.current.province.value.replace('-', ''),
+        billing_country: formDataObject.current.country.value,
+        delivery_address: formDataObject.current.streetAddress.value,
+        delivery_zip: formDataObject.current.postalcode.value,
+        delivery_city: formDataObject.current.city.value,
+        delivery_state: formDataObject.current.province.value.replace('-', ''),
+        delivery_country: formDataObject.current.country.value
+      }; // if not passing any custom attributes, pass null
+
+      var customFlags = {}; // if not passing any custom flags, pass null
+      // eslint-disable-next-line no-undef
+
+      mParticle.eCommerce.logProductAction( // eslint-disable-next-line no-undef
+      mParticle.ProductActionType.Checkout, [product1], customAttributes, customFlags, transactionAttributes);
+    }; // eslint-disable-next-line no-undef
+
+
+    mParticle.Identity.identify(identityRequest, identityCallback);
+  };
+
   var createOrderPaymentLink = /*#__PURE__*/function () {
     var _ref = completeOrder_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var res1, json, draftOrderID, totalPrice, payLoad, res2, paymentUrl, _data;
-
+      var res1, json, draftOrderID, totalPrice, invoiceUrl, payLoad, res2, paymentUrl, dataContact, dataDeal;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -29882,11 +29963,10 @@ var completeOrder_completeOrder = function completeOrder(formDataObject, quantit
               json = _context.sent;
               draftOrderID = json.data.draftOrderCreate.draftOrder.id;
               totalPrice = json.data.draftOrderCreate.draftOrder.totalPrice;
+              invoiceUrl = json.data.draftOrderCreate.draftOrder.invoiceUrl;
               changeLoaderText('Fetching your payment link');
-              AddToCart_mp(draftOrderID); // console.log(draftOrderID);
-              // console.log(totalPrice);
-              //use the draftorder return to create a paylink
-
+              AddToCart_mp(draftOrderID, invoiceUrl);
+              Checkout_mp(draftOrderID, invoiceUrl);
               payLoad = {
                 amount: totalPrice,
                 callbackUrl: "https://www.ikhokha.com/_hcms/api/ikShopCallback?draftorderid=".concat(draftOrderID),
@@ -29905,19 +29985,19 @@ var completeOrder_completeOrder = function completeOrder(formDataObject, quantit
                 test: true
               };
               console.log(payLoad);
-              _context.next = 16;
+              _context.next = 18;
               return axios({
                 method: 'post',
                 url: 'https://www.ikhokha.com/_hcms/api/createpaymentlink',
                 data: payLoad
               });
 
-            case 16:
+            case 18:
               res2 = _context.sent;
               paymentUrl = res2.data.paymentUrl;
               /* update in hubspot */
 
-              _data = JSON.stringify({
+              dataContact = JSON.stringify({
                 email: formDataObject.current.email.value,
                 properties: [{
                   property: 'firstname',
@@ -29942,32 +30022,58 @@ var completeOrder_completeOrder = function completeOrder(formDataObject, quantit
                   value: formDataObject.current.postalcode.value
                 }]
               });
-              _context.next = 21;
+              dataDeal = JSON.stringify({
+                properties: {
+                  amount: totalPrice,
+                  country: formDataObject.current.country.value,
+                  street_address: formDataObject.current.streetAddress.value,
+                  provice: formDataObject.current.province.value,
+                  postal_code: formDataObject.current.province.value,
+                  suburb: formDataObject.current.city.value,
+                  complex___building_name: formDataObject.current.complexBuilding.value,
+                  ram_zone_id: formDataObject.current.ramZoneId.value,
+                  payment_link: paymentUrl,
+                  pipeline: 'Ecommerce Pipeline',
+                  dealname: draftOrderID
+                }
+              });
+              _context.next = 24;
               return axios({
                 method: 'post',
                 url: 'https://www.ikhokha.com/_hcms/api/ikcompleteorder',
                 headers: {
                   'Content-Type': 'application/json'
                 },
-                data: _data
+                data: dataContact
               });
 
-            case 21:
+            case 24:
+              _context.next = 26;
+              return axios({
+                method: 'post',
+                url: 'https://www.ikhokha.com/_hcms/api/ikupdatehsdeal',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                data: dataDeal
+              });
+
+            case 26:
               location = paymentUrl;
-              _context.next = 27;
+              _context.next = 32;
               break;
 
-            case 24:
-              _context.prev = 24;
+            case 29:
+              _context.prev = 29;
               _context.t0 = _context["catch"](1);
               console.log(_context.t0.message);
 
-            case 27:
+            case 32:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[1, 24]]);
+      }, _callee, null, [[1, 29]]);
     }));
 
     return function createOrderPaymentLink() {
@@ -30132,6 +30238,10 @@ var CheckoutProcess_CheckoutProcess = function CheckoutProcess() {
     countrybiz: {
       value: 'South Africa',
       isValid: true
+    },
+    ramZoneId: {
+      value: '',
+      isValid: false
     }
   });
   var personalDetails = Object(react["useRef"])(null);
@@ -30186,14 +30296,15 @@ var CheckoutProcess_CheckoutProcess = function CheckoutProcess() {
       if (formDataObject.current.confirmEmail.value === formDataObject.current.email.value) {
         setFieldValid(['email', 'confirmEmail']);
       } else {
-        setFieldInValid(['email', 'confirmEmail']);
+        setFieldInValid(['confirmEmail']);
+        console.log('confirmEmail');
       }
     } //3. city autopopulate trigger event for suburb and postal code
 
 
     if (fieldName === 'city') {
-      checkFieldLength('city');
       checkFieldLength('suburb');
+      checkFieldLength('city');
       checkFieldLength('postalcode');
       checkFieldLength('country');
     }
@@ -30222,12 +30333,15 @@ var CheckoutProcess_CheckoutProcess = function CheckoutProcess() {
   var setFieldValid = function setFieldValid(arr) {
     arr.forEach(function (field) {
       personalDetails.current.querySelector(".".concat(field)).classList.remove('inValid');
+      formDataObject.current[field].isValid = true;
     });
   };
 
   var setFieldInValid = function setFieldInValid(arr) {
     arr.forEach(function (field) {
-      personalDetails.current.querySelector(".".concat(field)).classList.add('inValid');
+      personalDetails.current.querySelector(".".concat(field)).classList.add('inValid'); //  formDataObject.current[field].value = field;
+
+      formDataObject.current[field].isValid = false;
     });
   }; //Next Btn status 1
   //if there are no invalids open up the submit
@@ -30290,14 +30404,14 @@ var CheckoutProcess_CheckoutProcess = function CheckoutProcess() {
       //ram zone id suburbs listing - the suburb auto popuplate trigger
       var searchTimer;
 
-      deliveryDetails.current.querySelector('input[name="city"]').onkeyup = function () {
-        var searchTerm = deliveryDetails.current.querySelector('input[name="city"]').value;
+      deliveryDetails.current.querySelector('input[name="suburb"]').onkeyup = function () {
+        var searchTerm = deliveryDetails.current.querySelector('input[name="suburb"]').value;
         searchTimer = setTimeout(function () {
           return getSurburbList(searchTerm);
-        }, 1000);
+        }, 800);
       };
 
-      deliveryDetails.current.querySelector('input[name="city"]').onkeydown = function () {
+      deliveryDetails.current.querySelector('input[name="suburb"]').onkeydown = function () {
         clearTimeout(searchTimer);
       };
     }
@@ -30331,7 +30445,7 @@ var CheckoutProcess_CheckoutProcess = function CheckoutProcess() {
     //go fetch the data using the search term and then set it as state
     //setRamData
     //
-    //axios
+    //axios[]
     if (searchTerm !== '' && searchTerm.length > 3) {
       setShowElipsis(true);
       CheckoutProcess_axios({
@@ -30378,7 +30492,8 @@ var CheckoutProcess_CheckoutProcess = function CheckoutProcess() {
     showElipsis: showElipsis,
     ramData: ramData,
     setRamData: setRamData,
-    formDataObject: formDataObject
+    formDataObject: formDataObject,
+    canSetNextBtnActive: canSetNextBtnActive
   }), step == 2 && /*#__PURE__*/react_default.a.createElement(Forms_PaymentDetails, {
     paymentDetailsRef: paymentDetailsRef,
     fieldDetailsValid: fieldDetailsValid,

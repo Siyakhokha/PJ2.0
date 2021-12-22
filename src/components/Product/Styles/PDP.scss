@@ -4,6 +4,10 @@
   max-width: 940px;
 }
 
+.ik-shop-checkout {
+  margin-bottom: 4rem;
+}
+
 .tt-input-counter {
   border: 1px solid #cccccc;
   overflow: hidden;
@@ -434,7 +438,7 @@
 
         &:last-child {
           border-bottom: 2px dotted #eee;
-          padding-bottom: 8rem;
+          padding-bottom: 5rem;
         }
         &.active {
           height: auto;
