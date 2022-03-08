@@ -51,12 +51,13 @@ const hubspotConfig = ({ portal, autoupload } = {}) => {
         },
       ],
     },
+
     plugins: [
       new HubSpotAutoUploadPlugin({
         portal,
         autoupload,
         src: 'dist',
-        dest: 'ik-shop-checkout 2.0',
+        dest: 'Guest-checkout',
       }),
       new MiniCssExtractPlugin({
         filename: '[name].css',

@@ -1,9 +1,8 @@
-import React, { createContext, useState, useRef } from 'react';
+import React, { createContext, useState, useRef, useEffect } from 'react';
 import Alerts from '../components/Product/Alerts';
 import Loading from '../helpers/Loading/Loading';
 import { GET_PRODUCT_BY_HANDLE } from '../GraphQL/Queries/getProductByHandle';
 import { useQuery } from '@apollo/client';
-// import axios from 'axios';
 
 export const ShopifyData = createContext();
 const ShopifyDataProvider = ({ children }) => {
@@ -26,6 +25,12 @@ const ShopifyDataProvider = ({ children }) => {
   const perPage = 10;
   const [step, setStep] = useState(-1);
   const [stepToPersonalDetails, setStepToPersonalDetail] = useState(false);
+  const [NextStep, setNextStep] = useState(false);
+  const pageStepCount = useRef(1);
+  const bar = useRef();
+
+  const stepperContainer = useRef();
+  const prevSetRef = useRef();
 
   const targetModulesData = document.querySelectorAll(
     '.ik-shop-checkout > script[type="application/json"]',
@@ -131,6 +136,15 @@ const ShopifyDataProvider = ({ children }) => {
     }
   };
 
+  //custom Hook
+  const usePrevious = data => {
+    const ref = useRef();
+    useEffect(() => {
+      ref.current = data;
+    }, [data]);
+    return ref.current;
+  };
+
   const mobiQuantity = e => {
     if (e.target.value <= 15) {
       setQuantity(parseInt(e.target.value));
@@ -144,7 +158,15 @@ const ShopifyDataProvider = ({ children }) => {
   };
 
   const nextClick = () => {
+    setNextStep(false);
     setStep(step + 1);
+    if (step === -1) {
+      setTimeout(() => {
+        setNextStep(true);
+      }, 500);
+    } else {
+      setNextStep(false);
+    }
   };
   const prevClick = () => {
     setStep(step - 1);
@@ -168,6 +190,8 @@ const ShopifyDataProvider = ({ children }) => {
     return (
       <Alerts ErrortextAlert="Cant find product please check product slug." />
     );
+  let productName = data.productByHandle.title.replace('(SIM Included)', '');
+  let productImage = data.productByHandle.images.edges[2].node.transformedSrc;
 
   return (
     <ShopifyData.Provider
@@ -189,6 +213,15 @@ const ShopifyDataProvider = ({ children }) => {
         Subtotal,
         step,
         stepToPersonalDetails,
+        pageStepCount,
+        productImage,
+        productName,
+        setNextStep,
+        NextStep,
+        bar,
+        stepperContainer,
+        prevSetRef,
+        usePrevious,
         setStepToPersonalDetail,
         prevClick,
         nextClick,

@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AAAA,OAAO,AAAA,+BAA+B,CAAC;EACrC,UAAU,EAAE,IAAI;EAChB,gBAAgB,ECHC,OAAO;EDIxB,aAAa,EAAE,IAAI;EACnB,OAAO,EAAE,eAAe;EACxB,aAAa,EAAE,IAAI;CACpB",
+    "sources": [
+        "BusinessDetails.scss",
+        "../../uicommons/variables.scss"
+    ],
+    "names": [],
+    "file": "BusinessDetails.css"
+}

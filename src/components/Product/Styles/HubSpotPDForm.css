@@ -1,0 +1,330 @@
+#hubspotPDForm,
+#ReviewForm {
+  -webkit-transition: 2s ease-in;
+  transition: 2s ease-in;
+  width: 100%;
+  margin: auto;
+  text-align: left;
+}
+
+#hubspotPDForm ::-webkit-input-placeholder,
+#ReviewForm ::-webkit-input-placeholder {
+  /* Edge */
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transform-origin: center;
+  transform-origin: center;
+  opacity: 1;
+  cursor: default;
+  background-color: rgba(255, 255, 255, 0);
+  text-align: left;
+  letter-spacing: 0px;
+  color: #707070;
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0);
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  font-style: normal;
+  font-family: Roboto, Arial;
+  text-decoration: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  overflow-x: unset;
+  overflow-y: unset;
+  white-space: pre;
+  width: 288px;
+  height: 20px;
+  left: 10px;
+  top: 10px;
+}
+
+#hubspotPDForm :-ms-input-placeholder,
+#ReviewForm :-ms-input-placeholder {
+  /* Internet Explorer */
+  box-sizing: content-box;
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transform-origin: center;
+  transform-origin: center;
+  opacity: 1;
+  cursor: default;
+  background-color: rgba(255, 255, 255, 0);
+  text-align: left;
+  letter-spacing: 0px;
+  color: #707070;
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0);
+  font-size: 15px;
+  font-weight: 400 !important;
+  font-style: normal;
+  font-family: Roboto, Arial;
+  text-decoration: none;
+  box-shadow: none;
+  overflow-x: unset;
+  overflow-y: unset;
+  white-space: pre;
+  width: 288px;
+  height: 20px;
+  left: 10px;
+  top: 10px;
+}
+
+#hubspotPDForm ::-ms-input-placeholder,
+#ReviewForm ::-ms-input-placeholder {
+  box-sizing: content-box;
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transform-origin: center;
+  transform-origin: center;
+  opacity: 1;
+  cursor: default;
+  background-color: rgba(255, 255, 255, 0);
+  text-align: left;
+  letter-spacing: 0px;
+  color: #707070;
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0);
+  font-size: 15px;
+  font-weight: 400 !important;
+  font-style: normal;
+  font-family: Roboto, Arial;
+  text-decoration: none;
+  box-shadow: none;
+  overflow-x: unset;
+  overflow-y: unset;
+  white-space: pre;
+  width: 288px;
+  height: 20px;
+  left: 10px;
+  top: 10px;
+}
+
+#hubspotPDForm ::placeholder,
+#ReviewForm ::placeholder {
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transform-origin: center;
+  transform-origin: center;
+  opacity: 1;
+  cursor: default;
+  background-color: rgba(255, 255, 255, 0);
+  text-align: left;
+  letter-spacing: 0px;
+  color: #707070;
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0);
+  font-size: 15px;
+  font-weight: 400 !important;
+  font-style: normal;
+  font-family: Roboto, Arial;
+  text-decoration: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  overflow-x: unset;
+  overflow-y: unset;
+  white-space: pre;
+  width: 288px;
+  height: 20px;
+  left: 10px;
+  top: 10px;
+}
+
+#hubspotPDForm input#review_score-a13c11cf-7bff-4436-8bc6-177fe7c39228,
+#ReviewForm input#review_score-a13c11cf-7bff-4436-8bc6-177fe7c39228 {
+  width: 14% !important;
+}
+
+#hubspotPDForm h4,
+#ReviewForm h4 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-family: 'Roboto', sans-serif;
+}
+
+#hubspotPDForm h3,
+#ReviewForm h3 {
+  font-size: 30px;
+  font-weight: 800;
+  margin-bottom: 0;
+  font-family: 'Baloo 2', sans-serif;
+  color: #000;
+  line-height: 1.2;
+}
+
+#hubspotPDForm .hs-form-field,
+#ReviewForm .hs-form-field {
+  margin-bottom: 15px;
+}
+
+#hubspotPDForm .hs-form-field .hs-input,
+#ReviewForm .hs-form-field .hs-input {
+  font-size: 16px;
+  padding: 8px;
+  width: 100%;
+  display: inline-block;
+  /* position: absolute; */
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transform-origin: center;
+  transform-origin: center;
+  opacity: 1;
+  background-color: white;
+  border-bottom-color: #222223;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-left-color: #222223;
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-right-color: #222223;
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-top-color: #222223;
+  border-top-style: solid;
+  height: 38px;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  font-style: normal;
+  font-family: Roboto, Arial;
+}
+
+#hubspotPDForm .hs-form-field .hs-input.select,
+#ReviewForm .hs-form-field .hs-input.select {
+  padding: 0px;
+}
+
+#hubspotPDForm .hs-form-field label,
+#ReviewForm .hs-form-field label {
+  font-family: 'Roboto', sans-serif;
+  opacity: 1;
+  cursor: default;
+  background-color: rgba(255, 255, 255, 0);
+  text-align: left;
+  line-height: 20px;
+  letter-spacing: 0px;
+  color: #1d1d1b;
+  -webkit-text-stroke: unset;
+  font-size: 12px;
+  font-weight: 500;
+  font-style: normal;
+  text-decoration: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  overflow-x: unset;
+  overflow-y: unset;
+  white-space: pre;
+  height: 16px;
+  left: 10px;
+  top: 8px;
+}
+
+#hubspotPDForm .hs-richtext,
+#ReviewForm .hs-richtext {
+  margin-bottom: 15px;
+}
+
+#hubspotPDForm .hubspot-link__container.sproket,
+#ReviewForm .hubspot-link__container.sproket {
+  display: none;
+}
+
+#hubspotPDForm .proceed-to-checkout-btn,
+#ReviewForm .proceed-to-checkout-btn {
+  line-height: 1;
+  font-weight: 700;
+  font-family: 'Roboto Bold', sans-serif;
+  display: inline-block;
+  position: relative;
+  letter-spacing: 0.01em;
+  font-size: 15px;
+  min-height: 40px;
+  background: 0;
+  margin: initial;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 11px 50px;
+  background-color: #fc0;
+  color: #000;
+  border: 0;
+}
+
+#hubspotPDForm .proceed-to-checkout-btn:hover,
+#ReviewForm .proceed-to-checkout-btn:hover {
+  background-color: #df2c4f;
+  color: #f1f1f1;
+}
+
+#hubspotPDForm form,
+#hubspotPDForm .submitted-message,
+#ReviewForm form,
+#ReviewForm .submitted-message {
+  font-weight: 400;
+  width: 70%;
+  margin: auto;
+  padding: 4rem 0 12rem;
+}
+
+#hubspotPDForm form input[type='text'],
+#hubspotPDForm form input[type='email'],
+#hubspotPDForm form input[type='password'],
+#hubspotPDForm form input[type='tel'],
+#hubspotPDForm form input[type='number'],
+#hubspotPDForm form input[type='file'],
+#hubspotPDForm form select,
+#hubspotPDForm form textarea,
+#ReviewForm form input[type='text'],
+#ReviewForm form input[type='email'],
+#ReviewForm form input[type='password'],
+#ReviewForm form input[type='tel'],
+#ReviewForm form input[type='number'],
+#ReviewForm form input[type='file'],
+#ReviewForm form select,
+#ReviewForm form textarea {
+  padding: 0;
+  background-color: #fff;
+  padding-right: 32px;
+  color: #959595;
+  display: block;
+  width: 100%;
+  height: 43px;
+  font-size: 15px;
+  line-height: 1em;
+  border-radius: 0;
+  outline: 0;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  border: 1px solid #000;
+  overflow: hidden;
+  position: relative;
+}
+
+#hubspotPDForm form textarea,
+#ReviewForm form textarea {
+  height: 15rem !important;
+}
+
+#hubspotPDForm label,
+#ReviewForm label {
+  font-size: 16px;
+  font-family: Roboto, sans-serif;
+}
+
+#hubspotPDForm input[type='number'],
+#ReviewForm input[type='number'] {
+  width: 20% !important;
+  text-align: center;
+}
+
+#hubspotPDForm .hs-form-28f7eb66-2de8-4b08-8dbe-b59d918490d0_5b1190a8-8ccb-4ec6-b278-243e261a4aac
+fieldset.form-columns-1
+.hs-input,
+#ReviewForm .hs-form-28f7eb66-2de8-4b08-8dbe-b59d918490d0_5b1190a8-8ccb-4ec6-b278-243e261a4aac
+fieldset.form-columns-1
+.hs-input {
+  width: 100%;
+}
+/*# sourceMappingURL=HubSpotPDForm.css.map */

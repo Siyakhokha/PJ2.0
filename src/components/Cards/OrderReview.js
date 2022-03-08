@@ -7,7 +7,6 @@ import { Views } from '../../utils/Views';
 
 const OrderReview = ({ goToView, formDataObject }) => {
   const { step } = useContext(ShopifyData);
-
   return (
     <>
       {(step == 1 || step == 2) && (
@@ -34,9 +33,9 @@ const OrderReview = ({ goToView, formDataObject }) => {
                 <span>{`${formDataObject.current.cellNumber.value}`}</span>
               </div>
             </section>
-            <section>
-              <label>Delivery Address</label>
-              {step == 2 && (
+            {step == 2 && (
+              <section>
+                <label>Delivery Address</label>
                 <button
                   className="edit-actions"
                   onClick={() => goToView(Views.delivery)}
@@ -44,16 +43,17 @@ const OrderReview = ({ goToView, formDataObject }) => {
                   <img src={editPencil} />
                   <span>Edit</span>
                 </button>
-              )}
-              <div className="detail-items-block">
-                <span>{`${formDataObject.current.country.value}`}</span>
-                <span>{`${formDataObject.current.complexBuilding.value}`}</span>
-                <span>{`${formDataObject.current.streetAddress.value}`}</span>
-                <span>{`${formDataObject.current.city.value}`}</span>
-                <span>{`${formDataObject.current.province.value}`}</span>
-                <span>{`${formDataObject.current.postalcode.value}`}</span>
-              </div>
-            </section>
+
+                <div className="detail-items-block">
+                  <span>{formDataObject.current.country.value}</span>
+                  <span>{`${formDataObject.current.complexBuilding.value}`}</span>
+                  <span>{`${formDataObject.current.streetAddress.value}`}</span>
+                  <span>{`${formDataObject.current.city.value}`}</span>
+                  <span>{formDataObject.current.province.value}</span>
+                  <span>{`${formDataObject.current.postalcode.value}`}</span>
+                </div>
+              </section>
+            )}
           </div>
         </div>
       )}

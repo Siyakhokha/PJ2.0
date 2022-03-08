@@ -1,0 +1,23 @@
+.loader {
+  position: relative;
+  height: 100vh;
+}
+
+.loader-item {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  margin: auto;
+  width: 100%;
+  text-align: center;
+}
+
+.loader-item img {
+  width: 12%;
+}
+
+.loader-item p {
+  font-size: 1.5vw;
+  line-height: 1.1;
+}
+/*# sourceMappingURL=Loading.css.map */

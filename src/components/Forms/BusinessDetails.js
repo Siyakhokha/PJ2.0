@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { customStyles } from '../SelectCustomStyles/SelectCustomStyles';
 import warningtriangle from '../../images/warningtriangle.svg';
@@ -10,7 +10,19 @@ const BusinessDetails = ({
   paymentDetailsRef,
   formDataObject,
 }) => {
+  const [Provincebiz, setProvincebiz] = useState(null);
+
+  useEffect(() => {
+    if (formDataObject.current.provincebiz.value) {
+      setProvincebiz({
+        value: formDataObject.current.provincebiz.value,
+        label: formDataObject.current.provincebiz.value,
+      });
+    }
+  }, []);
+
   const provinceSelectBiz = input => {
+    setProvincebiz(input);
     formDataObject.current['provincebiz'].value = input.value;
     formDataObject.current['provincebiz'].isValid = true;
   };
@@ -39,12 +51,8 @@ const BusinessDetails = ({
           name="complexBuildingbiz"
           id="complexBuildingbiz"
           placeholder="Type in here"
-          onKeyUpCapture={event => fieldDetailsValid(event)}
+          onBlur={event => fieldDetailsValid(event)}
         />
-        <div className="errorMsg">
-          <img src={warningtriangle} alt="error" />
-          <span>Please type in your Complex / Building</span>
-        </div>
       </div>
       <div className="input-item streetAddressbiz">
         <label for="streetAddressbiz" className="required">
@@ -56,13 +64,43 @@ const BusinessDetails = ({
           id="streetAddressbiz"
           placeholder="1 Nokwe Ave, Umhlanga"
           required
+          onBlur={event => fieldDetailsValid(event)}
+        />
+        <div className="errorMsg">
+          <img src={warningtriangle} alt="error" />
+          <span>Please type in your street address</span>
+        </div>
+      </div>
+      <div className="input-item select-item suburbbiz">
+        <label for="suburbbiz">Suburb</label>
+        <input
+          type="text"
+          name="suburbbiz"
+          id="suburbbiz"
+          required
           onKeyUpCapture={event => fieldDetailsValid(event)}
         />
         <div className="errorMsg">
           <img src={warningtriangle} alt="error" />
-          <span>Please type in your Street Address*</span>
+          <span></span>
         </div>
       </div>
+      <div className="input-item select-item citybiz">
+        <label for="citybiz">City</label>
+        <input
+          type="text"
+          name="citybiz"
+          id="citybiz"
+          required
+          autoComplete="nope"
+          onBlur={event => fieldDetailsValid(event)}
+        />
+        <div className="errorMsg">
+          <img src={warningtriangle} alt="error" />
+          <span>Please select your city</span>
+        </div>
+      </div>
+
       <div className="input-item select-item province-biz">
         <label for="province-biz">Province</label>
         <Select
@@ -81,29 +119,6 @@ const BusinessDetails = ({
           onChange={value => provinceSelectBiz(value)}
         />
       </div>
-      <div className="input-item select-item citybiz">
-        <label for="citybiz">City</label>
-        <input
-          type="text"
-          name="citybiz"
-          id="citybiz"
-          required
-          autoComplete="nope"
-          onBlur={event => fieldDetailsValid(event)}
-        />
-      </div>
-
-      <div className="input-item select-item suburbbiz">
-        <label for="suburbbiz">Suburb</label>
-        <input
-          type="text"
-          name="suburbbiz"
-          id="suburbbiz"
-          required
-          autoComplete="nope"
-          onKeyUpCapture={event => fieldDetailsValid(event)}
-        />
-      </div>
 
       <div className="input-item postalcodebiz">
         <label for="postalcodebiz" className="required">
@@ -116,10 +131,11 @@ const BusinessDetails = ({
           placeholder="4319"
           required
           onKeyUpCapture={event => fieldDetailsValid(event)}
+          onBlur={event => fieldDetailsValid(event)}
         />
         <div className="errorMsg">
           <img src={warningtriangle} alt="error" />
-          <span>Please type in your Postal Code*</span>
+          <span>Please type in your postal code</span>
         </div>
       </div>
     </section>

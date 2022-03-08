@@ -74,7 +74,9 @@ h3 {
     .margin-top-20 {
       margin-top: 20px;
     }
-
+    .order-summary {
+      margin-top: 5rem;
+    }
     .card {
       background-color: white;
       border-radius: 16px;
@@ -111,7 +113,6 @@ h3 {
         }
       }
     }
-
     .card.order-review {
       label {
         padding-bottom: 10px;
@@ -261,6 +262,10 @@ h3 {
         font-weight: 600;
       }
     }
+  }
+
+  .hide {
+    display: none;
   }
 
   @media (max-width: $layout-breakpoint-mobile) {
@@ -602,8 +607,8 @@ h3 {
 .loaderAnimContainer {
   background-color: white;
   border-radius: 12px;
-  width: 200px;
-  height: 150px;
+  width: 100%;
+  height: 100vh;
   position: fixed;
   z-index: 5;
   top: 50%;
@@ -623,8 +628,8 @@ h3 {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-box-shadow: 0px 0px 8px 0px #dddddd;
-  box-shadow: 0px 0px 8px 0px #dddddd;
+  // -webkit-box-shadow: 0px 0px 8px 0px #dddddd;
+  // box-shadow: 0px 0px 8px 0px #dddddd;
 }
 
 .loaderAnimContainer .loaderImage {

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import warningtriangle from '../../images/warningtriangle.svg';
 
 const PersonalDetails = ({
@@ -63,7 +62,7 @@ const PersonalDetails = ({
         />
         <div className="errorMsg">
           <img src={warningtriangle} alt="error" />
-          <span>Please type in a valid email</span>
+          <span>Please type in a valid email address</span>
         </div>
       </div>
       <div className="input-item confirmEmail">
@@ -76,7 +75,7 @@ const PersonalDetails = ({
           id="confirmEmail"
           placeholder="Jimmy@gmail.com"
           required
-          onKeyUpCapture={event => fieldDetailsValid(event)}
+          onBlur={event => fieldDetailsValid(event)}
           defaultValue={formDataObject.current.confirmEmail.value}
         />
         <div className="errorMsg">
@@ -92,8 +91,9 @@ const PersonalDetails = ({
           type="tel"
           name="cellNumber"
           id="cellNumber"
-          placeholder="Eg. 000-000-0000"
+          placeholder="000-000-0000"
           required
+          onBlur={event => fieldDetailsValid(event)}
           onKeyUpCapture={event => fieldDetailsValid(event)}
           defaultValue={formDataObject.current.cellNumber.value}
         />

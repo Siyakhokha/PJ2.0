@@ -18,7 +18,6 @@ const BillingAddressToggle = ({
   };
   return (
     <>
-      {/* the billing address toggle */}
       <div className="billing-address-block">
         <h3>Billing Address</h3>
         <p>Select the address that matches your card and payment method.</p>
@@ -47,7 +46,6 @@ const BillingAddressToggle = ({
         </div>
       </div>
 
-      {/* the billing address form */}
       {separateAddress && (
         <BusinessDetails
           paymentDetailsRef={paymentDetailsRef}

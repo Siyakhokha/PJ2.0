@@ -1,0 +1,41 @@
+.formInput {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding-bottom: 20px;
+}
+
+.formInput p {
+  color: red;
+  display: none;
+}
+
+.formInput input:invalid[focused='true'] {
+  border: 1px solid red;
+}
+
+.formInput input:invalid[focused='true'] ~ p {
+  display: block;
+}
+
+.formInput input {
+  border-radius: 16px !important;
+  border: 2px solid #000 !important;
+  padding: 14px !important;
+  width: 100% !important;
+  color: #3f3e38 !important;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+  display: block;
+  padding-left: 10px;
+  margin-bottom: 5px;
+}
+/*# sourceMappingURL=Inputfields.css.map */

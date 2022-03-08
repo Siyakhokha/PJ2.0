@@ -1,0 +1,65 @@
+.billing-address-block {
+  padding-bottom: 20px;
+}
+
+.billing-address-block h3 {
+  font-size: 20px;
+  margin-top: 24px;
+}
+
+.billing-address-block p {
+  color: #3f3e38;
+}
+
+.billing-address-block .address-billing-toggle .toggle-item {
+  border-radius: 16px;
+  -webkit-box-shadow: 0 5px 20px #1d1d1b1a;
+          box-shadow: 0 5px 20px #1d1d1b1a;
+  padding: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.billing-address-block .address-billing-toggle .toggle-item:first-child {
+  margin-bottom: 16px;
+}
+
+.billing-address-block .address-billing-toggle .toggle-item:hover {
+  cursor: pointer;
+}
+
+.billing-address-block .address-billing-toggle .toggle-item__title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #3f3e38;
+}
+
+.billing-address-block .address-billing-toggle .toggle-item__check-state-container {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #d1d1d1;
+  border-radius: 50%;
+  background-color: white;
+  text-align: center;
+}
+
+.billing-address-block .address-billing-toggle .toggle-item.selected {
+  background-color: #3f3e38;
+}
+
+.billing-address-block .address-billing-toggle .toggle-item.selected .toggle-item__title {
+  color: white;
+}
+
+.billing-address-block .address-billing-toggle .toggle-item.selected .toggle-item__check-state-container {
+  background-color: #ffcd00;
+  border: none;
+}
+/*# sourceMappingURL=BillingAddressToggle.css.map */

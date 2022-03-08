@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import Select from 'react-select';
 import { customStyles } from '../SelectCustomStyles/SelectCustomStyles';
 import warningtriangle from '../../images/warningtriangle.svg';
@@ -14,25 +13,32 @@ const DeliveryDetails = ({
 
   canSetNextBtnActive,
 }) => {
-  const [selectedZone, setSelectedZone] = useState(null);
   const [Province, setProvince] = useState(null);
 
   useEffect(() => {
     if (formDataObject.current.province.value) {
-      provinceSelect({ value: formDataObject.current.province.value });
+      setProvince({
+        value: formDataObject.current.province.value,
+        label: formDataObject.current.province.value,
+      });
     }
   }, []);
 
+  const capitalizeFirstLetter = string => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   const setSelectedRamZoneId = item => {
     if (item.area) {
-      formDataObject.current.city.value = item.area;
+      let city = item.area.toLowerCase();
+      let suburb = item.suburb.toLowerCase();
+      formDataObject.current.city.value = capitalizeFirstLetter(city);
       formDataObject.current.postalcode.value = `${item.postalCode}`;
-      formDataObject.current.suburb.value = `${item.suburb}`;
+      formDataObject.current.suburb.value = capitalizeFirstLetter(suburb);
       formDataObject.current['city'].isValid = true;
       formDataObject.current['postalcode'].isValid = true;
       formDataObject.current['suburb'].isValid = true;
-      // deliveryDetailsRef.current.querySelector('input[name="city"]').value =
-      //   item.area;
+
       deliveryDetailsRef.current.querySelector('input[name="suburb"]').value =
         item.suburb;
 
@@ -52,15 +58,13 @@ const DeliveryDetails = ({
 
     formDataObject.current.ramZoneId.value = item.ramZoneId;
     formDataObject.current.ramZoneId.isValid = true;
-
-    //console.log(item.ramZoneId);
   };
 
   const provinceSelect = input => {
-    console.log(input);
+    setProvince(input);
     formDataObject.current['province'].value = input.value;
     formDataObject.current['province'].isValid = true;
-    setProvince(formDataObject.current.province.value);
+
     formDataObject.current['postalcode'].isValid = true;
     formDataObject.current['suburb'].isValid = true;
     canSetNextBtnActive();
@@ -91,12 +95,12 @@ const DeliveryDetails = ({
           id="complexBuilding"
           placeholder="Type in here"
           defaultValue={formDataObject.current.complexBuilding.value}
-          // onBlur={event => fieldDetailsValid(event)}
+          onBlur={event => fieldDetailsValid(event)}
         />
-        <div className="errorMsg">
+        {/* <div className="errorMsg">
           <img src={warningtriangle} alt="error" />
-          <span>Please type in your Complex / Building</span>
-        </div>
+          <span>Please type in your postal code</span>
+        </div> */}
       </div>
       <div className="input-item streetAddress">
         <label for="streetAddress" className="required">
@@ -113,7 +117,7 @@ const DeliveryDetails = ({
         />
         <div className="errorMsg">
           <img src={warningtriangle} alt="error" />
-          <span>Please type in your Street Address*</span>
+          <span>Please type in your street address</span>
         </div>
       </div>
 
@@ -160,6 +164,10 @@ const DeliveryDetails = ({
           defaultValue={formDataObject.current.city.value}
           onBlur={event => fieldDetailsValid(event)}
         />
+        <div className="errorMsg">
+          <img src={warningtriangle} alt="error" />
+          <span>Please select your city</span>
+        </div>
       </div>
       <div className="input-item select-item province">
         <label for="province">Province</label>
@@ -177,7 +185,7 @@ const DeliveryDetails = ({
           ]}
           styles={customStyles}
           onChange={value => provinceSelect(value)}
-          defaultValue={Province}
+          value={Province}
         />
       </div>
       <div className="input-item postalcode">
@@ -195,7 +203,7 @@ const DeliveryDetails = ({
         />
         <div className="errorMsg">
           <img src={warningtriangle} alt="error" />
-          <span>Please type in your Postal Code*</span>
+          <span>Please type in your postal code</span>
         </div>
       </div>
     </section>

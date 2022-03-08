@@ -6,7 +6,7 @@
   "host_template_types": ["PAGE"],
   "icon": "Code",
   "js_assets": [],
-  "label": "ik-shop-guest-checkout 2.0",
+  "label": "Guest-checkout",
   "other_assets": [],
   "smart_type": "NOT_SMART",
   "tags": [],

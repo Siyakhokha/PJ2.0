@@ -1,0 +1,207 @@
+.PrepaidProduct {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
+  -webkit-box-align: initial;
+      -ms-flex-align: initial;
+          align-items: initial;
+  -ms-flex-preferred-size: 48%;
+      flex-basis: 48%;
+  margin: 5rem auto;
+  padding: 2rem;
+}
+
+.PrepaidProduct-text {
+  width: 60%;
+}
+
+.PrepaidProduct-text h4 {
+  font-family: 'Baloo 2',sans-serif !important;
+  color: #000000;
+  font-size: 30px;
+  width: 100%;
+  font-weight: 800;
+}
+
+.PrepaidProduct-text h6 {
+  font-family: 'Roboto',sans-serif !important;
+  color: #000000;
+  font-size: 20px;
+  width: 100%;
+  font-weight: 400;
+}
+
+.PrepaidProduct-text p {
+  width: 80%;
+  font-family: Roboto, sans-serif;
+  color: #000000;
+  line-height: 1.4;
+  font-size: 14px;
+  width: 100%;
+  font-weight: 400;
+}
+
+.PrepaidProduct-text-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -ms-flex-preferred-size: 33%;
+      flex-basis: 33%;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding: 1rem;
+}
+
+.PrepaidProduct-text-container-item {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-preferred-size: 33%;
+      flex-basis: 33%;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  margin-bottom: 1rem;
+}
+
+.PrepaidProduct-text-container-item-image {
+  margin-right: 0.5rem;
+}
+
+.PrepaidProduct-text-container-item-image img {
+  width: 100%;
+}
+
+.PrepaidProduct-text-container-item-text {
+  width: 75%;
+}
+
+.PrepaidProduct-text-container-item-text p {
+  font-family: Roboto, sans-serif;
+  color: #425466;
+  line-height: 16px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.PrepaidProduct-text-container-item-btn-area {
+  position: relative;
+  margin-top: 2rem;
+}
+
+.PrepaidProduct-text-container-item-btn-area .standard {
+  position: relative;
+  letter-spacing: .01em;
+  min-height: 40px;
+  background: 0;
+  margin: initial !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  border-radius: 10px !important;
+  background-color: #fc0;
+  color: #000;
+  border: 0;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 9px 15px;
+  display: inline-block;
+  margin-top: 0;
+  margin-right: -1px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-family: Roboto,sans-serif;
+  line-height: 20px;
+  -webkit-transition: all .4s linear;
+  transition: all .4s linear;
+}
+
+.PrepaidProduct-text-container-item-btn-area .standard:hover {
+  background-color: #df2c4f;
+  color: #e9e9e9;
+}
+
+.PrepaidProduct-text-container-item-btn-area .link {
+  border: 0;
+  line-height: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 9px 15px;
+  display: inline-block;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border-radius: 10px;
+  background-color: rgba(56, 152, 236, 0);
+  font-family: Roboto,sans-serif;
+  color: #28b2c7;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.PrepaidProduct-text-container-item-btn-area .link:hover {
+  color: #000;
+  font-weight: 700;
+}
+
+.PrepaidProduct-image {
+  width: 40%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.PrepaidProduct-image img {
+  width: 80%;
+}
+
+@media (max-width: 767.98px) {
+  .PrepaidProduct {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .PrepaidProduct-text {
+    width: 100%;
+  }
+  .PrepaidProduct-text h4 {
+    font-size: 6vw;
+  }
+  .PrepaidProduct-text-container-item-image {
+    margin-right: 0;
+  }
+  .PrepaidProduct-text-container-item-image img {
+    margin-right: 1.5rem;
+    width: 70%;
+  }
+  .PrepaidProduct-text-container-item-text {
+    width: 100%;
+  }
+  .PrepaidProduct-text-container-item-btn-area {
+    margin-top: 0rem;
+    margin-bottom: 2rem;
+  }
+  .PrepaidProduct-image {
+    width: 100%;
+  }
+  .PrepaidProduct-image img {
+    width: 100%;
+    margin: auto;
+  }
+}
+/*# sourceMappingURL=PrepaidProducts.css.map */

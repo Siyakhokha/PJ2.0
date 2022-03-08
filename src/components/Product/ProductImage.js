@@ -3,7 +3,6 @@ import { ShopifyData } from '../../Context/ShopifyData';
 
 const ProductImage = () => {
   const { data } = useContext(ShopifyData);
-
   return (
     <>
       {data.productByHandle.images.edges[2].node.transformedSrc && (

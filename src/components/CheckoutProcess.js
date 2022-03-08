@@ -3,42 +3,56 @@ import '../App.scss';
 import PersonalDetails from './Forms/PersonalDetails';
 import DeliveryDetails from './Forms/DeliveryDetails';
 import PaymentDetails from './Forms/PaymentDetails';
-
 import Stepper from './Stepper/Stepper';
-
 import trolley from '../images/trolley.svg';
-
 import { ValidateEmail } from '../utils/ValidateEmail';
 import { ValidatePhone } from '../utils/ValidatePhone';
 import OrderReview from './Cards/OrderReview';
 import OrderSummary from './Cards/OrderSummary';
 import { Views } from '../utils/Views';
-
 import { completeOrder } from '../utils/completeOrder';
 import { ShopifyData } from '../Context/ShopifyData';
+import { ValidateTextInput } from '../utils/ValidateTextInput';
+
+import {
+  SubmitDataPersonal,
+  SubmitDeliveryDetails,
+} from '../utils/SubmitFormData';
+// import { getSurburbList } from '../utils/getSurburbList';
+import Loading from '../helpers/Loading/Loading';
+import ProductInformataion from './Product/ProductInformataion';
+import StepCounter from './Stepper/StepCounter';
 
 const axios = require('axios');
 
 const CheckoutProcess = () => {
   const {
     quantity,
-    step,
-    setStep,
+    ProductID,
+    setProductID,
+    Taxes,
     Total,
+    step,
+    productImage,
+    productName,
+    setNextStep,
+    NextStep,
+    setStepToPersonalDetail,
     prevClick,
     nextClick,
-    ProductID,
-    setStepToPersonalDetail,
-    ModuleDataObject,
+    setStep,
     data,
-    Taxes,
+    setProductTitle,
   } = useContext(ShopifyData);
 
-  //states
-  // const [step, setStep] = useState(0);
   const [showElipsis, setShowElipsis] = useState(false);
   const [ramData, setRamData] = useState(null);
   const [isDesktop, setIsDeskTop] = useState(false);
+  const [draftOrderID, setDraftOrderID] = useState(null);
+
+  const OnlyletterNumbersAndSpaceRegex = /^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/;
+  const OnlyletterAndSpaceRegex = /^[a-zA-Z\s]*$/;
+  const OnlynumberRegex = '^[0-9]{4}$';
 
   //refs
   const businessDetailsSpecified = useRef(false);
@@ -92,16 +106,10 @@ const CheckoutProcess = () => {
     'postalcodebiz',
   ];
 
-  // const addDiscountCode = ev => {
-  //   let disCode = ev.target.parentElement.querySelector('input').value;
-  //   //console.log(disCode);
-  // };
-
   const fieldDetailsValid = event => {
     let fieldName = event.target.name;
     let fieldValue = event.target.value;
 
-    //check to see there is a length
     if (fieldValue.length != 0) {
       formDataObject.current[fieldName].value = fieldValue;
       formDataObject.current[fieldName].isValid = true;
@@ -110,53 +118,149 @@ const CheckoutProcess = () => {
       formDataObject.current[fieldName].isValid = false;
     }
 
-    //specific validity
-    //Phone
-    //1. Is it 10 digits long
-    if (fieldName === 'cellNumber') {
-      if (ValidatePhone(formDataObject.current[fieldName].value)) {
-        formDataObject.current[fieldName].isValid = true;
-        setFieldValid([fieldName]);
-      } else {
-        formDataObject.current[fieldName].isValid = false;
-        setFieldInValid([fieldName]);
-      }
+    switch (fieldName) {
+      case 'firstName':
+        if (ValidateTextInput(formDataObject.current[fieldName].value)) {
+          formDataObject.current[fieldName].isValid = true;
+          setFieldValid([fieldName]);
+        } else {
+          formDataObject.current[fieldName].isValid = false;
+          setFieldInValid([fieldName]);
+        }
+
+        break;
+      case 'lastName':
+        if (ValidateTextInput(formDataObject.current[fieldName].value)) {
+          formDataObject.current[fieldName].isValid = true;
+          setFieldValid([fieldName]);
+        } else {
+          formDataObject.current[fieldName].isValid = false;
+          setFieldInValid([fieldName]);
+        }
+        break;
+      case 'cellNumber':
+        if (ValidatePhone(formDataObject.current[fieldName].value)) {
+          formDataObject.current[fieldName].isValid = true;
+          setFieldValid([fieldName]);
+        } else {
+          formDataObject.current[fieldName].isValid = false;
+          setFieldInValid([fieldName]);
+        }
+        break;
+      case 'email':
+        if (ValidateEmail(formDataObject.current[fieldName].value)) {
+          formDataObject.current[fieldName].isValid = true;
+          setFieldValid([fieldName]);
+        } else {
+          formDataObject.current[fieldName].isValid = false;
+          setFieldInValid([fieldName]);
+        }
+        break;
+      case 'confirmEmail':
+        if (
+          ValidateEmail(formDataObject.current[fieldName].value) &&
+          formDataObject.current.confirmEmail.value ===
+            formDataObject.current.email.value
+        ) {
+          formDataObject.current[fieldName].isValid = true;
+          setFieldValid([fieldName]);
+        } else {
+          formDataObject.current[fieldName].isValid = false;
+          setFieldInValid([fieldName]);
+        }
+        break;
+      case 'complexBuilding':
+        if (
+          formDataObject.current.complexBuilding.value.match(
+            OnlyletterNumbersAndSpaceRegex,
+          )
+        ) {
+          formDataObject.current[fieldName].isValid = true;
+          setDeliveryFieldValid([fieldName]);
+        } else {
+          formDataObject.current[fieldName].isValid = false;
+          setDeliveryFieldInValid([fieldName]);
+        }
+        break;
+      case 'streetAddress':
+        if (
+          formDataObject.current.streetAddress.value.match(
+            OnlyletterNumbersAndSpaceRegex,
+          )
+        ) {
+          formDataObject.current[fieldName].isValid = true;
+          setDeliveryFieldValid([fieldName]);
+        } else {
+          formDataObject.current[fieldName].isValid = false;
+          setDeliveryFieldInValid([fieldName]);
+        }
+        break;
+      case 'city':
+        if (formDataObject.current.city.value.match(OnlyletterAndSpaceRegex)) {
+          formDataObject.current[fieldName].isValid = true;
+          setDeliveryFieldValid([fieldName]);
+        } else {
+          formDataObject.current[fieldName].isValid = false;
+          setDeliveryFieldInValid([fieldName]);
+        }
+        break;
+      case 'postalcode':
+        if (formDataObject.current.postalcode.value.match(OnlynumberRegex)) {
+          formDataObject.current[fieldName].isValid = true;
+          setDeliveryFieldValid([fieldName]);
+        } else {
+          formDataObject.current[fieldName].isValid = false;
+          setDeliveryFieldInValid([fieldName]);
+        }
+        break;
+      case 'complexBuildingbiz':
+        if (
+          formDataObject.current.complexBuildingbiz.value.match(
+            OnlyletterNumbersAndSpaceRegex,
+          )
+        ) {
+          formDataObject.current[fieldName].isValid = true;
+          setBusinessFieldValid([fieldName]);
+        } else {
+          formDataObject.current[fieldName].isValid = false;
+          setBusinessFieldInValid([fieldName]);
+        }
+        break;
+      case 'streetAddressbiz':
+        if (
+          formDataObject.current.streetAddressbiz.value.match(
+            OnlyletterNumbersAndSpaceRegex,
+          )
+        ) {
+          formDataObject.current[fieldName].isValid = true;
+          setBusinessFieldValid([fieldName]);
+        } else {
+          formDataObject.current[fieldName].isValid = false;
+          setBusinessFieldInValid([fieldName]);
+        }
+        break;
+      case 'citybiz':
+        if (
+          formDataObject.current.citybiz.value.match(OnlyletterAndSpaceRegex)
+        ) {
+          formDataObject.current[fieldName].isValid = true;
+          setBusinessFieldValid([fieldName]);
+        } else {
+          formDataObject.current[fieldName].isValid = false;
+          setBusinessFieldInValid([fieldName]);
+        }
+        break;
+      case 'postalcodebiz':
+        if (formDataObject.current.postalcodebiz.value.match(OnlynumberRegex)) {
+          formDataObject.current[fieldName].isValid = true;
+          setBusinessFieldValid([fieldName]);
+        } else {
+          formDataObject.current[fieldName].isValid = false;
+          setBusinessFieldInValid([fieldName]);
+        }
+        break;
     }
 
-    //Email
-    //2. is email input valid
-    if (
-      (fieldName === 'confirmEmail' || fieldName === 'email') &&
-      (formDataObject.current.email.isValid ||
-        formDataObject.current.confirmEmail.isValid)
-    ) {
-      if (ValidateEmail(formDataObject.current[fieldName].value)) {
-        formDataObject.current[fieldName].isValid = true;
-        setFieldValid([fieldName]);
-      } else {
-        formDataObject.current[fieldName].isValid = false;
-        setFieldInValid([fieldName]);
-      }
-    }
-
-    //3. do email addresses match?
-    if (
-      (fieldName === 'confirmEmail' || fieldName === 'email') &&
-      (formDataObject.current.email.isValid ||
-        formDataObject.current.confirmEmail.isValid)
-    ) {
-      if (
-        formDataObject.current.confirmEmail.value ===
-        formDataObject.current.email.value
-      ) {
-        setFieldValid(['email', 'confirmEmail']);
-      } else {
-        setFieldInValid(['confirmEmail']);
-        console.log('confirmEmail');
-      }
-    }
-
-    //3. city autopopulate trigger event for suburb and postal code
     if (fieldName === 'city') {
       checkFieldLength('suburb');
       checkFieldLength('city');
@@ -171,11 +275,9 @@ const CheckoutProcess = () => {
     let ele = deliveryDetails.current.querySelector(
       `input[name='${fieldName}']`,
     );
-
     //because there seems to be a delay in dom referencing
     setTimeout(() => {
       let fieldValue = ele.value;
-      //console.log('fv ' + fieldValue);
       if (fieldValue.length != 0) {
         formDataObject.current[fieldName].value = fieldValue;
         formDataObject.current[fieldName].isValid = true;
@@ -183,11 +285,9 @@ const CheckoutProcess = () => {
         formDataObject.current[fieldName].value = fieldValue;
         formDataObject.current[fieldName].isValid = false;
       }
-
       canSetNextBtnActive();
     }, 2000);
   };
-
   const setFieldValid = arr => {
     arr.forEach(field => {
       personalDetails.current
@@ -196,16 +296,49 @@ const CheckoutProcess = () => {
       formDataObject.current[field].isValid = true;
     });
   };
-
   const setFieldInValid = arr => {
     arr.forEach(field => {
       personalDetails.current
         .querySelector(`.${field}`)
         .classList.add('inValid');
-      //  formDataObject.current[field].value = field;
       formDataObject.current[field].isValid = false;
     });
   };
+  const setBusinessFieldValid = arr => {
+    arr.forEach(field => {
+      paymentDetailsRef.current
+        .querySelector(`.${field}`)
+        .classList.remove('inValid');
+      formDataObject.current[field].isValid = true;
+    });
+  };
+  const setBusinessFieldInValid = arr => {
+    arr.forEach(field => {
+      paymentDetailsRef.current
+        .querySelector(`.${field}`)
+        .classList.add('inValid');
+      formDataObject.current[field].isValid = false;
+    });
+  };
+  const setDeliveryFieldValid = arr => {
+    arr.forEach(field => {
+      deliveryDetails.current
+        .querySelector(`.${field}`)
+        .classList.remove('inValid');
+      formDataObject.current[field].isValid = true;
+    });
+  };
+  const setDeliveryFieldInValid = arr => {
+    arr.forEach(field => {
+      deliveryDetails.current
+        .querySelector(`.${field}`)
+        .classList.add('inValid');
+      formDataObject.current[field].isValid = false;
+    });
+  };
+
+  setProductID(data.productByHandle.variants.edges[0].node.id);
+  setProductTitle(data.productByHandle.title);
 
   //Next Btn status 1
   //if there are no invalids open up the submit
@@ -241,10 +374,6 @@ const CheckoutProcess = () => {
       document.querySelector('.btn.complete-order').disabled = false;
     }
   };
-
-  // const nextClick = () => {
-  //   setStep(step + 1);
-  // };
 
   const goToView = view => {
     if (step == 2 && view == 0) {
@@ -308,15 +437,10 @@ const CheckoutProcess = () => {
   }, []);
 
   const getSurburbList = searchTerm => {
-    //go fetch the data using the search term and then set it as state
-    //setRamData
-    //
-    //axios[]
-
     if (searchTerm !== '' && searchTerm.length > 3) {
       setShowElipsis(true);
       axios({
-        url: `https://www.ikhokha.com/_hcms/api/fetchramzone`,
+        url: `http://hubspot-developers-azgmaw-6714403.hs-sites.com/_hcms/api/fetchramzone`,
         method: 'post',
         data: {
           searchTerm: searchTerm,
@@ -335,118 +459,201 @@ const CheckoutProcess = () => {
       setRamData(null);
     }
   };
+
+  const createOrder = async () => {
+    let lineItems = [
+      {
+        variantId: ProductID,
+        quantity: parseInt(quantity),
+      },
+    ];
+    //
+    let orderDetails = {
+      input: {
+        customAttributes: { key: 'ikShopDirectOrder', value: 'true' },
+        email: formDataObject.current.email.value,
+        tags: ['IKHOKHA_HUBSPOT'],
+        note: '',
+        lineItems: lineItems,
+        shippingAddress: {
+          address1: formDataObject.current.streetAddress.value,
+          address2: formDataObject.current.complexBuilding.value,
+          city: formDataObject.current.city.value,
+          country: formDataObject.current.country.value,
+          firstName: formDataObject.current.firstName.value,
+          lastName: formDataObject.current.lastName.value,
+          phone: formDataObject.current.cellNumber.value,
+          province: formDataObject.current.province.value,
+          provinceCode: formDataObject.current.postalcode.value,
+        },
+      },
+    };
+
+    if (formDataObject.current.citybiz.value !== '') {
+      orderDetails.input.billingAddress = {
+        address1: formDataObject.current.streetAddressbiz.value,
+        address2: formDataObject.current.complexBuildingbiz.value,
+        city: formDataObject.current.citybiz.value,
+        country: formDataObject.current.countrybiz.value,
+        province: formDataObject.current.provincebiz.value,
+        provinceCode: formDataObject.current.postalcodebiz.value,
+      };
+    }
+
+    try {
+      let res1 = await axios({
+        method: 'post',
+        url: 'https://www.ikhokha.com/_hcms/api/getdraftorderid',
+        data: orderDetails,
+      });
+
+      const json = await res1.data;
+
+      if (json.data.draftOrderCreate.draftOrder.id) {
+        console.log(json.data.draftOrderCreate.draftOrder.id);
+        SubmitDeliveryDetails(formDataObject, setNextStep);
+        setDraftOrderID(json.data.draftOrderCreate.draftOrder.id);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <div className="ik-shop-checkout__container">
-      <Stepper step={step} />
+    <>
+      {step == -1 && (
+        <div id="one" className="container">
+          <ProductInformataion />
+        </div>
+      )}
+      {NextStep == false && (step == 0 || step == 1 || step == 2) && (
+        <div id="one" className="container">
+          <Loading />
+        </div>
+      )}
 
-      <div className="capture-view">
-        <div className="first-block">
-          <div className="step-info">
-            <label className="step-value">{`STEP ${step + 1}`}</label>
-            <label className="step-title">{stepTitles[step]}</label>
-          </div>
+      <div className="ik-shop-checkout__container container">
+        {step != Views.display && NextStep == true && <Stepper step={step} />}
 
-          {step == 0 && (
-            <PersonalDetails
-              personalDetailsRef={personalDetails}
-              fieldDetailsValid={fieldDetailsValid}
-              formDataObject={formDataObject}
-            />
-          )}
+        <div className="capture-view">
+          <div className="first-block">
+            {step != Views.display && NextStep == true && (
+              <StepCounter step={step} stepTitles={stepTitles} />
+            )}
 
-          {step == 1 && (
-            <DeliveryDetails
-              deliveryDetailsRef={deliveryDetails}
-              fieldDetailsValid={fieldDetailsValid}
-              showElipsis={showElipsis}
-              ramData={ramData}
-              setRamData={setRamData}
-              formDataObject={formDataObject}
-              canSetNextBtnActive={canSetNextBtnActive}
-            />
-          )}
+            {step == 0 && NextStep == true && (
+              <PersonalDetails
+                personalDetailsRef={personalDetails}
+                fieldDetailsValid={fieldDetailsValid}
+                formDataObject={formDataObject}
+              />
+            )}
 
-          {step == 2 && (
-            <PaymentDetails
-              paymentDetailsRef={paymentDetailsRef}
-              fieldDetailsValid={fieldDetailsValid}
-              formDataObject={formDataObject}
-              businessDetailsSpecified={businessDetailsSpecified}
-              canSetNextBtnActive={canSetNextBtnActive}
-              goToView={goToView}
-              isDesktop={isDesktop}
-            />
-          )}
+            {step == 1 && NextStep == true && (
+              <DeliveryDetails
+                deliveryDetailsRef={deliveryDetails}
+                fieldDetailsValid={fieldDetailsValid}
+                showElipsis={showElipsis}
+                ramData={ramData}
+                setRamData={setRamData}
+                formDataObject={formDataObject}
+                canSetNextBtnActive={canSetNextBtnActive}
+              />
+            )}
 
-          {step != Views.payment && (
-            <div className="pinned-total-nav-block">
-              <div className="top-row">
-                <div className="top-row-left">
-                  <img src={trolley} alt="trolley" />
-                  <span className="top-row-left__title">Total</span>
-                  <span className="top-row-left__quantity">
-                    ({quantity}) items
-                  </span>
-                </div>
-                {Total && (
-                  <div className="top-row-right">
-                    <span className="top-row-right__amt">
-                      R{Total.toFixed(2)}
-                    </span>
+            {step == 2 && NextStep == true && (
+              <PaymentDetails
+                paymentDetailsRef={paymentDetailsRef}
+                fieldDetailsValid={fieldDetailsValid}
+                formDataObject={formDataObject}
+                businessDetailsSpecified={businessDetailsSpecified}
+                canSetNextBtnActive={canSetNextBtnActive}
+                goToView={goToView}
+                isDesktop={isDesktop}
+              />
+            )}
+            <>
+              {step != Views.payment && step != Views.display && (
+                <div className={NextStep ? 'pinned-total-nav-block' : 'hide'}>
+                  <div className="top-row">
+                    <div className="top-row-left">
+                      <img src={trolley} alt="trolley" />
+                      <span className="top-row-left__title">Total</span>
+                      <span className="top-row-left__quantity">
+                        ({quantity}) items
+                      </span>
+                    </div>
+                    {Total && (
+                      <div className="top-row-right">
+                        <span className="top-row-right__amt">
+                          R{Total.toFixed(2)}
+                        </span>
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-              <div className="btm-row">
-                <button onClick={() => prevClick()} className="btn sec-btn">
-                  Back
-                </button>
-                <button
-                  onClick={() => nextClick()}
-                  className={`btn prim-btn step${step} next`}
-                >
-                  Next
-                </button>
-              </div>
+                  <div className="btm-row">
+                    <button onClick={() => prevClick()} className="btn sec-btn">
+                      Back
+                    </button>
+                    <button
+                      onClick={() => {
+                        nextClick();
+                        step == 0
+                          ? SubmitDataPersonal(formDataObject, setNextStep)
+                          : createOrder();
+                      }}
+                      className={`btn prim-btn step${step} next`}
+                    >
+                      Next
+                    </button>
+                  </div>
+                </div>
+              )}
+            </>
+
+            {step === Views.payment && (
+              <>
+                <div className={NextStep ? 'payment-note' : 'hide'}>
+                  <h3>Payment Method</h3>
+                  <p>
+                    All transactions are secure and encrypted. **Should you want
+                    to do a manual EFT, please email{' '}
+                    <a href="mailto: eft@ikhokha.com">eft@ikhokha.com.</a>
+                  </p>
+                </div>
+                <div className={NextStep ? '' : 'hide'}>
+                  <button
+                    className="btn prim-btn complete-order"
+                    onClick={() =>
+                      completeOrder(
+                        formDataObject,
+                        quantity,
+                        Total,
+                        Taxes,
+                        draftOrderID,
+                        productImage,
+                        productName,
+                      )
+                    }
+                  >
+                    Complete Order
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+          {isDesktop && step != Views.display && NextStep == true && (
+            <div className="second-block">
+              <OrderSummary formDataObject={formDataObject} />
+              <OrderReview
+                goToView={goToView}
+                formDataObject={formDataObject}
+              />
             </div>
           )}
-
-          {step === Views.payment && (
-            <>
-              <div className="payment-note">
-                <h3>Payment Method</h3>
-                <p>
-                  All transactions are secure and encrypted. **Should you want
-                  to do a manual EFT, please email{' '}
-                  <a href="mailto: eft@ikhokha.com">eft@ikhokha.com.</a>
-                </p>
-              </div>
-              <button
-                className="btn prim-btn complete-order"
-                onClick={() =>
-                  completeOrder(
-                    formDataObject,
-                    quantity,
-                    ProductID,
-                    ModuleDataObject,
-                    data,
-                    Total,
-                    Taxes,
-                  )
-                }
-              >
-                Complete Order
-              </button>
-            </>
-          )}
         </div>
-        {isDesktop && (
-          <div className="second-block">
-            <OrderSummary formDataObject={formDataObject} />
-            <OrderReview goToView={goToView} formDataObject={formDataObject} />
-          </div>
-        )}
       </div>
-    </div>
+    </>
   );
 };
 

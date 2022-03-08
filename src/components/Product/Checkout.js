@@ -5,9 +5,9 @@ const Checkout = () => {
   const {
     quantity,
     nextClick,
-    step,
     mobiQuantity,
     adJustQuantity,
+    setNextStep,
   } = useContext(ShopifyData);
 
   return (
@@ -34,7 +34,9 @@ const Checkout = () => {
             className={`${
               quantity > 0 ? 'active' : 'buy-now-container__BuyBtn'
             }`}
-            onClick={() => nextClick()}
+            onClick={() => {
+              nextClick();
+            }}
           >
             <div className="buy-now-container__BuyBtn--text">
               Proceed to Checkout
