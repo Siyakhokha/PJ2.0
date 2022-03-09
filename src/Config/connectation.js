@@ -3,12 +3,12 @@ import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
 const httpLink = createHttpLink({
-  uri: process.env.STOREFRONT_URL,
+  uri: 'https://ikhokha.myshopify.com/api/2021-07/graphql.json',
 });
 
 const authLink = setContext(() => ({
   headers: {
-    'X-Shopify-Storefront-Access-Token': process.env.STOREFRONT_TOKEN,
+    'X-Shopify-Storefront-Access-Token': '8ee7fbad1afb2c1b468bbba4b4bf6dfd',
     'Content-Type': 'application/json',
   },
 }));

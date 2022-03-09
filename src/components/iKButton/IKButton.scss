@@ -1,0 +1,26 @@
+@import '../../variables.scss';
+
+.ikButton-container {
+  padding-top: 32px;
+  padding-bottom: 32px;
+  width: 100%;
+  button {
+    background-color: $--theme-color-primary-yellow;
+    border-radius: $--theme-border-radius;
+    border: none;
+    font-size: $--theme-button-font-size;
+    color: $--theme-color-primary-black;
+    font-weight: bold;
+    width: inherit;
+    padding: 16px;
+
+    &:hover {
+      background-color: $--theme-color-primary-black;
+      color: white;
+    }
+    &:disabled {
+      background-color: $--theme-color-primary-disabled-grey;
+      color: white;
+    }
+  }
+}

@@ -54,7 +54,7 @@ export const SubmitDataPersonal = async (DataPersonal, setNextStep) => {
       method: 'post',
       url:
         'https://api.hsforms.com/submissions/v3/integration/submit/6412394/84efb5ce-4177-4a7f-abb0-9b8a53c2224e',
-      headers: {error
+      headers: {
         'Content-Type': 'application/json',
       },
       data: data,

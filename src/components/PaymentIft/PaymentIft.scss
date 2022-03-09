@@ -1,0 +1,122 @@
+@import '../../variables.scss';
+
+.guest-checkout-ift-payment-choice {
+  font-family: $--theme-font-family-primary;
+
+  h2 {
+    font-family: $--theme-heading-2-font-family !important;
+    font-size: $--theme-heading-2-font-size;
+    color: $--theme-heading-2-color;
+  }
+
+  p {
+    font-family: $--theme-body-font-family !important;
+    font-size: $--theme-body-font-size;
+    color: $--theme-body-color;
+  }
+
+  h3 {
+    font-family: $--theme-heading-3-font-family !important;
+    font-size: $--theme-heading-3-font-size;
+    color: $--theme-heading-3-color;
+    margin-bottom: 0;
+  }
+
+  &-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 30px;
+
+    &__block {
+      border-radius: $--theme-border-radius;
+      background-color: white;
+      box-shadow: $--theme-box-drop-shadow;
+      padding: $--theme-box-padding;
+      display: grid;
+      grid-template-columns: 35px 1fr 35px;
+      transform: translate(0px, 0px);
+      transition: transform 0.2s ease-in;
+      color: black;
+
+      @media screen and (max-width: $layout-breakpoint-tablet) {
+        min-height: 100px;
+      }
+
+      svg {
+        margin-top: 16px;
+        path {
+          fill: black;
+        }
+      }
+      &__splurb {
+        padding: 0 16px;
+
+        p {
+          margin-bottom: 0;
+        }
+      }
+
+      &__radio {
+        border: 2px solid $--theme-bullet-border-color;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        align-self: center;
+
+        svg {
+          opacity: 0;
+        }
+      }
+
+      &:hover {
+        transform: translate(-3px, -3px);
+        background-color: $--theme-color-primary-yellow;
+        color: white;
+
+        .guest-checkout-ift-payment-choice-container__block__splurb {
+          h3,
+          p {
+            color: black;
+          }
+        }
+
+        .guest-checkout-ift-payment-choice-container__block__radio {
+          border-color: #1d1d1b;
+        }
+      }
+
+      &.selected {
+        background-color: #1d1d1b;
+
+        svg {
+          margin-top: 16px;
+          path {
+            fill: white;
+          }
+        }
+
+        .guest-checkout-ift-payment-choice-container__block__splurb {
+          h3,
+          p {
+            color: white;
+          }
+        }
+
+        .guest-checkout-ift-payment-choice-container__block__radio {
+          border-color: #1d1d1b;
+          background-color: $--theme-color-primary-yellow;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          svg {
+            margin-top: 0;
+            opacity: 1;
+            path {
+              fill: #1d1d1b;
+            }
+          }
+        }
+      }
+    }
+  }
+}
