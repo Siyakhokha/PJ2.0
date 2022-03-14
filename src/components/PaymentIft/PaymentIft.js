@@ -51,7 +51,7 @@ const PaymentIft = ({
     showLoader('Redirecting to payment page.');
 
     let payLoad = {
-      amount: pmtTotal / 100,
+      amount: pmtTotal,
       callbackUrl: `https://www.ikhokha.com/_hcms/api/ikshopcallback?draftorderid=${pmtdraftOrderID}`,
       successUrl: `https://www.ikhokha.com/pmt-res-success?draftorderid=${pmtdraftOrderID}`,
       failUrl: `https://www.ikhokha.com/pmt-res-fail?draftorderid=${pmtdraftOrderID}`,

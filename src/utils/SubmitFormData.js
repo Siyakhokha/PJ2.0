@@ -2,7 +2,6 @@ import axios from 'axios';
 
 export const SubmitDataPersonal = async (DataPersonal, setNextStep) => {
   let data = {
-    submittedAt: Date.now(),
     fields: [
       {
         objectTypeId: '0-1',
@@ -59,12 +58,12 @@ export const SubmitDataPersonal = async (DataPersonal, setNextStep) => {
       },
       data: data,
     });
-    alert(res1);
+    //alert(res1);
     if (res1.status === 200) {
       setNextStep(true);
     }
   } catch (error) {
-    alert(error);
+    //alert(error);
     setNextStep(false);
   }
 };
