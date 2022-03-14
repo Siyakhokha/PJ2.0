@@ -1,0 +1,151 @@
+.guest-checkout-ift-payment-choice {
+  font-family: Roboto, sans;
+}
+
+.guest-checkout-ift-payment-choice h2 {
+  font-family: Roboto, sans !important;
+  font-size: 20px;
+  color: #707070;
+}
+
+.guest-checkout-ift-payment-choice p {
+  font-family: Roboto, sans !important;
+  font-size: 16px;
+  color: #60605e;
+}
+
+.guest-checkout-ift-payment-choice h3 {
+  font-family: Roboto, sans !important;
+  font-size: 18px;
+  color: #60605e;
+  margin-bottom: 0;
+}
+
+.guest-checkout-ift-payment-choice-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  -webkit-column-gap: 40px;
+          column-gap: 40px;
+}
+
+@media screen and (max-width: 768px) {
+  .guest-checkout-ift-payment-choice-container {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+    row-gap: 30px;
+  }
+}
+
+.guest-checkout-ift-payment-choice-container__block {
+  border-radius: 16px;
+  background-color: white;
+  -webkit-box-shadow: 0px 5px 20px #d1d1d1;
+          box-shadow: 0px 5px 20px #d1d1d1;
+  padding: 16px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 35px 1fr 35px;
+      grid-template-columns: 35px 1fr 35px;
+  -webkit-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+  -webkit-transition: -webkit-transform 0.2s ease-in;
+  transition: -webkit-transform 0.2s ease-in;
+  transition: transform 0.2s ease-in;
+  transition: transform 0.2s ease-in, -webkit-transform 0.2s ease-in;
+  color: black;
+}
+
+@media screen and (max-width: 768px) {
+  .guest-checkout-ift-payment-choice-container__block {
+    min-height: 100px;
+  }
+}
+
+.guest-checkout-ift-payment-choice-container__block svg {
+  margin-top: 16px;
+}
+
+.guest-checkout-ift-payment-choice-container__block svg path {
+  fill: black;
+}
+
+.guest-checkout-ift-payment-choice-container__block__splurb {
+  padding: 0 16px;
+}
+
+.guest-checkout-ift-payment-choice-container__block__splurb p {
+  margin-bottom: 0;
+}
+
+.guest-checkout-ift-payment-choice-container__block__radio {
+  border: 2px solid #d1d1d1;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.guest-checkout-ift-payment-choice-container__block__radio svg {
+  opacity: 0;
+}
+
+.guest-checkout-ift-payment-choice-container__block:hover {
+  -webkit-transform: translate(-3px, -3px);
+          transform: translate(-3px, -3px);
+  background-color: #ffcc00;
+  color: white;
+}
+
+.guest-checkout-ift-payment-choice-container__block:hover .guest-checkout-ift-payment-choice-container__block__splurb h3,
+.guest-checkout-ift-payment-choice-container__block:hover .guest-checkout-ift-payment-choice-container__block__splurb p {
+  color: black;
+}
+
+.guest-checkout-ift-payment-choice-container__block:hover .guest-checkout-ift-payment-choice-container__block__radio {
+  border-color: #1d1d1b;
+}
+
+.guest-checkout-ift-payment-choice-container__block.selected {
+  background-color: #1d1d1b;
+}
+
+.guest-checkout-ift-payment-choice-container__block.selected svg {
+  margin-top: 16px;
+}
+
+.guest-checkout-ift-payment-choice-container__block.selected svg path {
+  fill: white;
+}
+
+.guest-checkout-ift-payment-choice-container__block.selected .guest-checkout-ift-payment-choice-container__block__splurb h3,
+.guest-checkout-ift-payment-choice-container__block.selected .guest-checkout-ift-payment-choice-container__block__splurb p {
+  color: white;
+}
+
+.guest-checkout-ift-payment-choice-container__block.selected .guest-checkout-ift-payment-choice-container__block__radio {
+  border-color: #1d1d1b;
+  background-color: #ffcc00;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.guest-checkout-ift-payment-choice-container__block.selected .guest-checkout-ift-payment-choice-container__block__radio svg {
+  margin-top: 0;
+  opacity: 1;
+}
+
+.guest-checkout-ift-payment-choice-container__block.selected .guest-checkout-ift-payment-choice-container__block__radio svg path {
+  fill: #1d1d1b;
+}
+/*# sourceMappingURL=PaymentIft.css.map */

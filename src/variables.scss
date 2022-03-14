@@ -1,0 +1,45 @@
+//colors
+$--theme-color-primary-dark-grey: #707070;
+$--theme-color-primary-disabled-grey: #bebebe;
+$--theme-color-primary-light-grey: #60605e;
+$--theme-color-primary-black: #000000;
+$--theme-color-primary-lighter-grey: #d1d1d1;
+$--theme-color-primary-yellow: #ffcc00;
+
+//typography
+$--theme-font-family-primary: Roboto, sans;
+
+//h2
+$--theme-heading-2-color: $--theme-color-primary-dark-grey;
+$--theme-heading-2-font-size: 20px;
+$--theme-heading-2-font-family: $--theme-font-family-primary;
+
+//h3
+$--theme-heading-3-color: $--theme-color-primary-light-grey;
+$--theme-heading-3-font-size: 18px;
+$--theme-heading-3-font-family: $--theme-font-family-primary;
+
+//p
+$--theme-body-color: $--theme-color-primary-light-grey;
+$--theme-body-font-size: 16px;
+$--theme-body-color-smaller: $--theme-color-primary-light-grey;
+$--theme-body-font-size-smaller: 14px;
+$--theme-body-font-family: $--theme-font-family-primary;
+
+//button
+$--theme-button-font-size: 18px;
+
+//ui elements
+$--theme-bullet-border-color: $--theme-color-primary-lighter-grey;
+
+//box drop shadow
+$--theme-box-drop-shadow: 0px 5px 20px $--theme-color-primary-lighter-grey;
+
+//measures
+$--theme-border-radius: 16px;
+$--theme-box-padding: 16px;
+
+$layout-breakpoint-desktop: 1080px;
+$layout-breakpoint-laptop: 1024px;
+$layout-breakpoint-tablet: 768px;
+$layout-breakpoint-mobile: 360px;

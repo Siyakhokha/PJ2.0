@@ -22,6 +22,7 @@ import {
 import Loading from '../helpers/Loading/Loading';
 import ProductInformataion from './Product/ProductInformataion';
 import StepCounter from './Stepper/StepCounter';
+import PaymentIft from './PaymentIft/PaymentIft';
 
 const axios = require('axios');
 
@@ -364,14 +365,14 @@ const CheckoutProcess = () => {
     } else if (step === 2 && businessDetailsSpecified.current) {
       paymentDetailsMembers.every(input => {
         if (!formDataObject.current[input].isValid) {
-          document.querySelector('.btn.complete-order').disabled = true;
+          //document.querySelector('.btn.complete-order').disabled = true;
           return false;
         }
-        document.querySelector('.btn.complete-order').disabled = false;
+        //document.querySelector('.btn.complete-order').disabled = false;
         return true;
       });
     } else if (step === 2 && !businessDetailsSpecified.current) {
-      document.querySelector('.btn.complete-order').disabled = false;
+      //document.querySelector('.btn.complete-order').disabled = false;
     }
   };
 
@@ -613,15 +614,8 @@ const CheckoutProcess = () => {
 
             {step === Views.payment && (
               <>
-                <div className={NextStep ? 'payment-note' : 'hide'}>
-                  <h3>Payment Method</h3>
-                  <p>
-                    All transactions are secure and encrypted. **Should you want
-                    to do a manual EFT, please email{' '}
-                    <a href="mailto: eft@ikhokha.com">eft@ikhokha.com.</a>
-                  </p>
-                </div>
                 <div className={NextStep ? '' : 'hide'}>
+                  {/*
                   <button
                     className="btn prim-btn complete-order"
                     onClick={() =>
@@ -638,6 +632,17 @@ const CheckoutProcess = () => {
                   >
                     Complete Order
                   </button>
+
+                  */}
+                  <PaymentIft
+                    pmtTotal={Total}
+                    pmtformDataObject={formDataObject}
+                    pmtdraftOrderID={draftOrderID}
+                    pmtTaxes={Taxes}
+                    pmtImage={productImage}
+                    pmtProductName={productName}
+                    pmtQuantity={quantity}
+                  />
                 </div>
               </>
             )}

@@ -2,7 +2,6 @@ import axios from 'axios';
 
 export const SubmitDataPersonal = async (DataPersonal, setNextStep) => {
   let data = {
-    submittedAt: Date.now(),
     fields: [
       {
         objectTypeId: '0-1',
@@ -54,17 +53,17 @@ export const SubmitDataPersonal = async (DataPersonal, setNextStep) => {
       method: 'post',
       url:
         'https://api.hsforms.com/submissions/v3/integration/submit/6412394/84efb5ce-4177-4a7f-abb0-9b8a53c2224e',
-      headers: {error
+      headers: {
         'Content-Type': 'application/json',
       },
       data: data,
     });
-    alert(res1);
+    //alert(res1);
     if (res1.status === 200) {
       setNextStep(true);
     }
   } catch (error) {
-    alert(error);
+    //alert(error);
     setNextStep(false);
   }
 };

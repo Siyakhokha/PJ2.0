@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack --watch --env.autoupload --mode production",
-    "build": "rm -Rf dist && webpack --mode production",
-    "deploy": "rm -Rf dist && webpack --mode production && hs upload dist ik-shop-checkout",
+    "build": "del dist && webpack --mode production",
+    "deploy": "del dist && webpack --mode production && hs upload dist ik-shop-checkout",
     "lint": "eslint src && prettier --list-different 'src/**/*.js' 'src/**/*.json'",
     "prettier:write": "prettier --write 'src/**/*.js' 'src/**/*.json'"
   },
