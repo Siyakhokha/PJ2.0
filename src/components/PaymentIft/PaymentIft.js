@@ -3,7 +3,7 @@ import './PaymentIft.scss';
 import IKButton from '../../components/iKButton/IKButton';
 const axios = require('axios');
 import { AddToCartEvent } from '../../../src/utils/mparticleEvents';
-import { showLoader } from './ikLoader/js/ik-ui-loader';
+import { showLoader } from '../../utils/ikLoader/js/ik-ui-loader';
 
 const PaymentIft = ({
   pmtTotal,
@@ -48,7 +48,7 @@ const PaymentIft = ({
   };
 
   const generatePaymentLink = () => {
-    showLoader('Redirecting to payment page.');
+    showLoader('Redirecting to the payment page.');
 
     let payLoad = {
       amount: pmtTotal,
