@@ -2,8 +2,9 @@ import React, { useRef, useState } from 'react';
 import './PaymentIft.scss';
 import IKButton from '../../components/iKButton/IKButton';
 const axios = require('axios');
-import { AddToCartEvent } from '../../../src/utils/mparticleEvents';
+import { CheckoutEvent } from '../../../src/utils/mparticleEvents';
 import { showLoader } from '../../utils/ikLoader/js/ik-ui-loader';
+import { editdraftoerderbyid } from '../../utils/editOrderById';
 
 const PaymentIft = ({
   pmtTotal,
@@ -40,6 +41,8 @@ const PaymentIft = ({
   };
 
   const payWithEFT = async () => {
+    editdraftoerderbyid(pmtdraftOrderID);
+
     window.location.href = `${payRefUrl.current}/ift`;
   };
 
@@ -48,12 +51,25 @@ const PaymentIft = ({
   };
 
   const generatePaymentLink = () => {
+    CheckoutEvent(
+      pmtformDataObject,
+      pmtdraftOrderID,
+      pmtImage,
+      pmtProductName,
+      pmtQuantity,
+      pmtTotal,
+      pmtTaxes,
+    );
+
     showLoader('Redirecting to the payment page.');
 
     let payLoad = {
       amount: pmtTotal,
       callbackUrl: `https://www.ikhokha.com/_hcms/api/ikshopcallback?draftorderid=${pmtdraftOrderID}`,
-      successUrl: `https://www.ikhokha.com/pmt-res-success?draftorderid=${pmtdraftOrderID}`,
+      successUrl: `https://www.ikhokha.com/pmt-res-success?${pmtdraftOrderID.replace(
+        'gid://shopify/DraftOrder/',
+        '',
+      )}`,
       failUrl: `https://www.ikhokha.com/pmt-res-fail?draftorderid=${pmtdraftOrderID}`,
       client: {
         platformName: 'ik_shop_direct_hubspot',
@@ -73,7 +89,7 @@ const PaymentIft = ({
     const getLink = async () => {
       const res = await axios({
         method: 'post',
-        url: 'https://www.ikhokha.com/_hcms/api/createpaymentlinkstaging',
+        url: 'https://www.ikhokha.com/_hcms/api/createpaymentlink',
         data: payLoad,
         headers: headers,
       });
@@ -81,15 +97,15 @@ const PaymentIft = ({
     };
 
     getLink().then(() => {
-      AddToCartEvent(
-        pmtformDataObject,
-        pmtdraftOrderID,
-        pmtImage,
-        pmtProductName,
-        pmtQuantity,
-        pmtTotal,
-        pmtTaxes,
-      );
+      // CheckoutEvent(
+      //   pmtformDataObject,
+      //   pmtdraftOrderID,
+      //   pmtImage,
+      //   pmtProductName,
+      //   pmtQuantity,
+      //   pmtTotal,
+      //   pmtTaxes,
+      // );
       switch (payType.current) {
         case 'cc':
           payWithCC();

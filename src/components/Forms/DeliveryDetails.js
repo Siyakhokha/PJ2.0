@@ -10,7 +10,7 @@ const DeliveryDetails = ({
   ramData,
   setRamData,
   formDataObject,
-
+  getSurburbList,
   canSetNextBtnActive,
 }) => {
   const [Province, setProvince] = useState(null);
@@ -95,7 +95,7 @@ const DeliveryDetails = ({
           id="complexBuilding"
           placeholder="Type in here"
           defaultValue={formDataObject.current.complexBuilding.value}
-          onBlur={event => fieldDetailsValid(event)}
+          // onBlur={event => fieldDetailsValid(event)}
         />
         {/* <div className="errorMsg">
           <img src={warningtriangle} alt="error" />
@@ -110,7 +110,7 @@ const DeliveryDetails = ({
           type="text"
           name="streetAddress"
           id="streetAddress"
-          placeholder="1 Nokwe Ave, Umhlanga"
+          placeholder="1 Nokwe Ave"
           required
           onBlur={event => fieldDetailsValid(event)}
           defaultValue={formDataObject.current.streetAddress.value}
@@ -131,6 +131,11 @@ const DeliveryDetails = ({
           autoComplete="nope"
           onKeyUpCapture={event => fieldDetailsValid(event)}
           defaultValue={formDataObject.current.suburb.value}
+          onChange={event => {
+            if (event.target.value.length >= 4) {
+              getSurburbList(event.target.value);
+            }
+          }}
         />
         {showElipsis && (
           <div className="pulse-container">
@@ -186,6 +191,7 @@ const DeliveryDetails = ({
           styles={customStyles}
           onChange={value => provinceSelect(value)}
           value={Province}
+          onKeyUpCapture={event => fieldDetailsValid(event)}
         />
       </div>
       <div className="input-item postalcode">

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { ShopifyData } from '../../Context/ShopifyData';
+import { PersonalNavigationEvent } from '../../utils/mparticleEvents';
 
 const MobileCheckout = () => {
   const { quantity, nextClick, mobiQuantity } = useContext(ShopifyData);
@@ -17,7 +18,10 @@ const MobileCheckout = () => {
           className={`buy-now-container__BuyBtn ${
             quantity > 0 ? 'active' : ''
           }`}
-          onClick={() => nextClick()}
+          onClick={() => {
+            nextClick();
+            PersonalNavigationEvent();
+          }}
         >
           <div className="buy-now-container__BuyBtn--text">Checkout</div>
         </button>

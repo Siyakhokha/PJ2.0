@@ -6,6 +6,7 @@ export const AddToCartEvent = (
   quantity,
   Total,
   Taxes,
+  InvoiceUrl,
 ) => {
   let identityRequest = {
     userIdentities: {
@@ -38,7 +39,10 @@ export const AddToCartEvent = (
       Step: 1,
     };
     let customAttributes = {
-      cart_url: `https://www.ikhokha.com/abandoned-cart-product-display?${draftOrderID}`,
+      cart_url: `https://www.ikhokha.com/abandoned-cart-product-display?${draftOrderID.replace(
+        'gid://shopify/DraftOrder/',
+        '',
+      )}`,
       event_source: 'Online',
       cart_total: parseInt(Total),
       currency_code: 'ZAR',
@@ -57,7 +61,15 @@ export const AddToCartEvent = (
   mParticle.Identity.identify(identityRequest, identityCallback);
 };
 
-export const CheckoutEvent = (id, formDataObject) => {
+export const CheckoutEvent = (
+  formDataObject,
+  draftOrderID,
+  productImage,
+  productName,
+  quantity,
+  Total,
+  Taxes,
+) => {
   let identityRequest = {
     userIdentities: {
       email: formDataObject.current.email.value,
@@ -74,6 +86,10 @@ export const CheckoutEvent = (id, formDataObject) => {
       'iKhokha',
       1,
       '0000',
+      {
+        sku: productName,
+        // image_url: productImage,
+      },
     );
 
     let transactionAttributes = {
@@ -84,7 +100,10 @@ export const CheckoutEvent = (id, formDataObject) => {
       Step: 2,
     };
     let customAttributes = {
-      cart_url: `https://www.ikhokha.com/abandoned-cart-product-display?${draftOrderID}`,
+      cart_url: `https://www.ikhokha.com/abandoned-cart-product-display?${draftOrderID.replace(
+        'gid://shopify/DraftOrder/',
+        '',
+      )}`,
       event_source: 'Online',
       company_name: formDataObject.current.firstName.value,
       sub_total: parseInt(Total - Taxes),
@@ -120,4 +139,20 @@ export const CheckoutEvent = (id, formDataObject) => {
     );
   };
   mParticle.Identity.identify(identityRequest, identityCallback);
+};
+
+export const PersonalNavigationEvent = () => {
+  mParticle.logEvent('Checkout Journey', mParticle.EventType.Navigation, {
+    source_page: 'Personal',
+  });
+};
+export const DeliveryNavigationEvent = () => {
+  mParticle.logEvent('Checkout Journey', mParticle.EventType.Navigation, {
+    source_page: 'Delivery',
+  });
+};
+export const PaymentNavigationEvent = () => {
+  mParticle.logEvent('Checkout Journey', mParticle.EventType.Navigation, {
+    source_page: 'Payment',
+  });
 };

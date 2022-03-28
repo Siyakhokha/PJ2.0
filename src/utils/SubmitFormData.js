@@ -1,6 +1,8 @@
 import axios from 'axios';
-
+import { DeliveryNavigationEvent } from './mparticleEvents';
 export const SubmitDataPersonal = async (DataPersonal, setNextStep) => {
+  DeliveryNavigationEvent();
+
   let data = {
     // submittedAt: Date.now(),
     fields: [

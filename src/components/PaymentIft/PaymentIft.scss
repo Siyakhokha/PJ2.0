@@ -81,12 +81,12 @@
         }
 
         .guest-checkout-ift-payment-choice-container__block__radio {
-          border-color: #1d1d1b;
+          border-color: #3f3e38;
         }
       }
 
       &.selected {
-        background-color: #1d1d1b;
+        background-color: #3f3e38;
 
         svg {
           margin-top: 16px;
@@ -103,7 +103,7 @@
         }
 
         .guest-checkout-ift-payment-choice-container__block__radio {
-          border-color: #1d1d1b;
+          border-color: #3f3e38;
           background-color: $--theme-color-primary-yellow;
           display: flex;
           justify-content: center;
@@ -112,7 +112,7 @@
             margin-top: 0;
             opacity: 1;
             path {
-              fill: #1d1d1b;
+              fill: #3f3e38;
             }
           }
         }

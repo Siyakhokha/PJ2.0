@@ -1,14 +1,10 @@
 import React, { useContext } from 'react';
 import { ShopifyData } from '../../Context/ShopifyData';
-
+import { PersonalNavigationEvent } from '../../utils/mparticleEvents';
 const Checkout = () => {
-  const {
-    quantity,
-    nextClick,
-    mobiQuantity,
-    adJustQuantity,
-    setNextStep,
-  } = useContext(ShopifyData);
+  const { quantity, nextClick, mobiQuantity, adJustQuantity } = useContext(
+    ShopifyData,
+  );
 
   return (
     <>
@@ -36,6 +32,7 @@ const Checkout = () => {
             }`}
             onClick={() => {
               nextClick();
+              PersonalNavigationEvent();
             }}
           >
             <div className="buy-now-container__BuyBtn--text">

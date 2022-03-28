@@ -1,4 +1,4 @@
-var axios = require('axios');
+import axios from 'axios';
 import { showLoader } from './ikLoader/js/ik-ui-loader';
 import { AddToCartEvent } from './mparticleEvents';
 
@@ -14,6 +14,7 @@ export const completeOrder = (
   const createOrderPaymentLink = async () => {
     showLoader('Redirecting to payment page.');
 
+    6;
     try {
       let payLoad = {
         amount: Total,

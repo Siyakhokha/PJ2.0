@@ -36,7 +36,7 @@
     "allow_new_line": false,
     "show_emoji_picker": false,
     "type": "text",
-    "default": "ikhokha-register-shaker"
+    "default": "ikhokha-shaker-solo-2"
   },
   {
     "name": "product_id",

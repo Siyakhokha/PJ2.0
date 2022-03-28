@@ -57,7 +57,7 @@ const hubspotConfig = ({ portal, autoupload } = {}) => {
         portal,
         autoupload,
         src: 'dist',
-        dest: 'Guest-checkout',
+        dest: 'Purchase_Journey_And_EFT_V2.2',
       }),
       new MiniCssExtractPlugin({
         filename: '[name].css',

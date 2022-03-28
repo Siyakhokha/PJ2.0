@@ -13,12 +13,15 @@ import { Views } from '../utils/Views';
 import { completeOrder } from '../utils/completeOrder';
 import { ShopifyData } from '../Context/ShopifyData';
 import { ValidateTextInput } from '../utils/ValidateTextInput';
+import {
+  AddToCartEvent,
+  PaymentNavigationEvent,
+} from '../utils/mparticleEvents';
 
 import {
   SubmitDataPersonal,
   SubmitDeliveryDetails,
 } from '../utils/SubmitFormData';
-// import { getSurburbList } from '../utils/getSurburbList';
 import Loading from '../helpers/Loading/Loading';
 import ProductInformataion from './Product/ProductInformataion';
 import StepCounter from './Stepper/StepCounter';
@@ -50,8 +53,10 @@ const CheckoutProcess = () => {
   const [ramData, setRamData] = useState(null);
   const [isDesktop, setIsDeskTop] = useState(false);
   const [draftOrderID, setDraftOrderID] = useState(null);
+  const [InvoiceUrl, setInvoiceUrl] = useState(null);
 
   const OnlyletterNumbersAndSpaceRegex = /^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/;
+  // const OnlyletterNumbersAndSpaceRegex = /^[ A-Za-z0-9_@./#&+,-]*$/;
   const OnlyletterAndSpaceRegex = /^[a-zA-Z\s]*$/;
   const OnlynumberRegex = '^[0-9]{4}$';
 
@@ -390,24 +395,43 @@ const CheckoutProcess = () => {
 
   /* to catch the city auto fetch suburbs list */
   useEffect(() => {
-    if (deliveryDetails.current !== null && step === 1) {
-      //ram zone id suburbs listing - the suburb auto popuplate trigger
-      let searchTimer;
+    // setTimeout(() => getSurburbList('morningside'), 800);
 
-      deliveryDetails.current.querySelector(
-        'input[name="suburb"]',
-      ).onkeyup = function() {
-        let searchTerm = deliveryDetails.current.querySelector(
-          'input[name="suburb"]',
-        ).value;
-        searchTimer = setTimeout(() => getSurburbList(searchTerm), 800);
-      };
-      deliveryDetails.current.querySelector(
-        'input[name="suburb"]',
-      ).onkeydown = function() {
-        clearTimeout(searchTimer);
-      };
-    }
+    // if (deliveryDetails.current !== null && step === 1) {
+    //   let searchTimer;
+
+    //   deliveryDetails.current.querySelector(
+    //     'input[name="suburb"]',
+    //   ).onkeyup = function() {
+    //     let searchTerm = deliveryDetails.current.querySelector(
+    //       'input[name="suburb"]',
+    //     ).value;
+    //     searchTimer = setTimeout(() => getSurburbList(searchTerm), 800);
+    //   };
+    //   deliveryDetails.current.querySelector(
+    //     'input[name="suburb"]',
+    //   ).onkeydown = function() {
+    //     clearTimeout(searchTimer);
+    //   };
+    // }
+
+    // if (paymentDetailsRef.current !== null && step === 1) {
+    //   let searchTimer;
+
+    //   paymentDetailsRef.current.querySelector(
+    //     'input[name="suburbbiz"]',
+    //   ).onkeyup = function() {
+    //     let searchTerm = paymentDetailsRef.current.querySelector(
+    //       'input[name="suburbbiz"]',
+    //     ).value;
+    //     searchTimer = setTimeout(() => getSurburbList(searchTerm), 800);
+    //   };
+    //   paymentDetailsRef.current.querySelector(
+    //     'input[name="suburbbiz"]',
+    //   ).onkeydown = function() {
+    //     clearTimeout(searchTimer);
+    //   };
+    // }
 
     canSetNextBtnActive();
   }, [step]);
@@ -441,7 +465,7 @@ const CheckoutProcess = () => {
     if (searchTerm !== '' && searchTerm.length > 3) {
       setShowElipsis(true);
       axios({
-        url: `http://hubspot-developers-azgmaw-6714403.hs-sites.com/_hcms/api/fetchramzone`,
+        url: `https://www.ikhokha.com/_hcms/api/fetchramzone`,
         method: 'post',
         data: {
           searchTerm: searchTerm,
@@ -511,9 +535,20 @@ const CheckoutProcess = () => {
       const json = await res1.data;
 
       if (json.data.draftOrderCreate.draftOrder.id) {
-        console.log(json.data.draftOrderCreate.draftOrder.id);
+        setInvoiceUrl(json.data.draftOrderCreate.draftOrder.invoiceUrl);
         SubmitDeliveryDetails(formDataObject, setNextStep);
         setDraftOrderID(json.data.draftOrderCreate.draftOrder.id);
+        PaymentNavigationEvent();
+        AddToCartEvent(
+          formDataObject,
+          json.data.draftOrderCreate.draftOrder.id,
+          productImage,
+          productName,
+          quantity,
+          Total,
+          Taxes,
+          InvoiceUrl,
+        );
       }
     } catch (error) {
       console.log(error);
@@ -559,6 +594,7 @@ const CheckoutProcess = () => {
                 setRamData={setRamData}
                 formDataObject={formDataObject}
                 canSetNextBtnActive={canSetNextBtnActive}
+                getSurburbList={getSurburbList}
               />
             )}
 
@@ -642,6 +678,7 @@ const CheckoutProcess = () => {
                     pmtImage={productImage}
                     pmtProductName={productName}
                     pmtQuantity={quantity}
+                    pmtInvoiceUrl={InvoiceUrl}
                   />
                 </div>
               </>
@@ -650,10 +687,12 @@ const CheckoutProcess = () => {
           {isDesktop && step != Views.display && NextStep == true && (
             <div className="second-block">
               <OrderSummary formDataObject={formDataObject} />
-              <OrderReview
-                goToView={goToView}
-                formDataObject={formDataObject}
-              />
+              {step == 1 && (
+                <OrderReview
+                  goToView={goToView}
+                  formDataObject={formDataObject}
+                />
+              )}
             </div>
           )}
         </div>

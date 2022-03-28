@@ -1,7 +1,11 @@
 import React, { useContext } from 'react';
 import { ShopifyData } from '../../Context/ShopifyData';
-import chevron from '../../images/chevron.svg';
+// import chevron from '../../images/chevron.svg';
 import editPencil from '../../images/edit-pencil.svg';
+import {
+  PersonalNavigationEvent,
+  DeliveryNavigationEvent,
+} from '../../utils/mparticleEvents';
 
 import { Views } from '../../utils/Views';
 
@@ -21,7 +25,10 @@ const OrderReview = ({ goToView, formDataObject }) => {
               {(step == 1 || step == 2) && (
                 <button
                   className="edit-actions"
-                  onClick={() => goToView(Views.personal)}
+                  onClick={() => {
+                    goToView(Views.personal);
+                    PersonalNavigationEvent();
+                  }}
                 >
                   <img src={editPencil} />
                   <span>Edit</span>
@@ -38,7 +45,10 @@ const OrderReview = ({ goToView, formDataObject }) => {
                 <label>Delivery Address</label>
                 <button
                   className="edit-actions"
-                  onClick={() => goToView(Views.delivery)}
+                  onClick={() => {
+                    goToView(Views.delivery);
+                    DeliveryNavigationEvent();
+                  }}
                 >
                   <img src={editPencil} />
                   <span>Edit</span>
