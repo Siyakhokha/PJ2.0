@@ -83,7 +83,7 @@ const PaymentIft = ({
     };
 
     const headers = {
-      'x-auth-token': '2ce549a3-5ac8-469f-b3de-378b92dc3030',
+      'x-auth-token': process.env.PAYMENT_X_AUTH_TOKEN,
     };
 
     const getLink = async () => {

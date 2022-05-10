@@ -69,7 +69,11 @@ export const SubmitDataPersonal = async (DataPersonal, setNextStep) => {
   }
 };
 
-export const SubmitDeliveryDetails = async (DeliveryDetails, setNextStep) => {
+export const SubmitDeliveryDetails = async (
+  DeliveryDetails,
+  setNextStep,
+  draftOrderID,
+) => {
   try {
     let data = JSON.stringify({
       // submittedAt: Date.now(),
@@ -115,6 +119,14 @@ export const SubmitDeliveryDetails = async (DeliveryDetails, setNextStep) => {
           objectTypeId: '0-1',
           name: 'delivery_postal_code',
           value: DeliveryDetails.current.postalcode.value,
+        },
+        {
+          objectTypeId: '0-1',
+          name: 'shopify_order_id',
+          value: `https://www.ikhokha.com/abandoned-cart-product-display?${draftOrderID.replace(
+            'gid://shopify/DraftOrder/',
+            '',
+          )}`,
         },
       ],
       context: {

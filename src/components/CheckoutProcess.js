@@ -536,7 +536,11 @@ const CheckoutProcess = () => {
 
       if (json.data.draftOrderCreate.draftOrder.id) {
         setInvoiceUrl(json.data.draftOrderCreate.draftOrder.invoiceUrl);
-        SubmitDeliveryDetails(formDataObject, setNextStep);
+        SubmitDeliveryDetails(
+          formDataObject,
+          setNextStep,
+          json.data.draftOrderCreate.draftOrder.id,
+        );
         setDraftOrderID(json.data.draftOrderCreate.draftOrder.id);
         PaymentNavigationEvent();
         AddToCartEvent(
@@ -651,25 +655,6 @@ const CheckoutProcess = () => {
             {step === Views.payment && (
               <>
                 <div className={NextStep ? '' : 'hide'}>
-                  {/*
-                  <button
-                    className="btn prim-btn complete-order"
-                    onClick={() =>
-                      completeOrder(
-                        formDataObject,
-                        quantity,
-                        Total,
-                        Taxes,
-                        draftOrderID,
-                        productImage,
-                        productName,
-                      )
-                    }
-                  >
-                    Complete Order
-                  </button>
-
-                  */}
                   <PaymentIft
                     pmtTotal={Total}
                     pmtformDataObject={formDataObject}

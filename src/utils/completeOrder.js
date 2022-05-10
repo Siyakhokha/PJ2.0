@@ -14,7 +14,6 @@ export const completeOrder = (
   const createOrderPaymentLink = async () => {
     showLoader('Redirecting to payment page.');
 
-    6;
     try {
       let payLoad = {
         amount: Total,
