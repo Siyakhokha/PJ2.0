@@ -13,6 +13,7 @@ const ShopifyDataProvider = ({ children }) => {
   const [ProductTitle, setProductTitle] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [ProductID, setProductID] = useState({});
+  const [ProductCode, setProductCode] = useState('');
   const [accordionActive, setAccordionActive] = useState(-1);
   const [QuantityError, setQuantityError] = useState(false);
   const [ReadyForShipping, setReadyForShipping] = useState(1);
@@ -192,6 +193,12 @@ const ShopifyDataProvider = ({ children }) => {
     );
   let productName = data.productByHandle.title.replace('(SIM Included)', '');
   let productImage = data.productByHandle.images.edges[2].node.transformedSrc;
+  let productTotal = parseInt(
+    data.productByHandle.variants.edges[0].node.price,
+  );
+  let productTax =
+    (parseInt(data.productByHandle.variants.edges[0].node.price) * 13.044) /
+    100;
 
   return (
     <ShopifyData.Provider
@@ -210,6 +217,8 @@ const ShopifyDataProvider = ({ children }) => {
         QuantityError,
         Taxes,
         Total,
+        productTotal,
+        productTax,
         Subtotal,
         step,
         stepToPersonalDetails,
@@ -221,6 +230,7 @@ const ShopifyDataProvider = ({ children }) => {
         bar,
         stepperContainer,
         prevSetRef,
+        ProductCode,
         usePrevious,
         setStepToPersonalDetail,
         prevClick,
@@ -240,6 +250,7 @@ const ShopifyDataProvider = ({ children }) => {
         setProductTitle,
         uploadReviews,
         setProductID,
+        setProductCode,
         handlePageClick,
         getReviews,
       }}

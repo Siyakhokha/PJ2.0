@@ -14,6 +14,7 @@ const PaymentIft = ({
   pmtProductName,
   pmtQuantity,
   pmtTaxes,
+  newProductCode,
 }) => {
   const choiceRef = useRef(null);
   const payType = useRef(null);
@@ -59,6 +60,7 @@ const PaymentIft = ({
       pmtQuantity,
       pmtTotal,
       pmtTaxes,
+      newProductCode,
     );
 
     showLoader('Redirecting to the payment page.');
@@ -97,15 +99,6 @@ const PaymentIft = ({
     };
 
     getLink().then(() => {
-      // CheckoutEvent(
-      //   pmtformDataObject,
-      //   pmtdraftOrderID,
-      //   pmtImage,
-      //   pmtProductName,
-      //   pmtQuantity,
-      //   pmtTotal,
-      //   pmtTaxes,
-      // );
       switch (payType.current) {
         case 'cc':
           payWithCC();

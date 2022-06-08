@@ -16,7 +16,15 @@ import MobileCheckout from './MobileCheckout';
 import Checkout from './Checkout';
 import { ShopifyData } from '../../Context/ShopifyData';
 
-const ProductInformataion = () => {
+const ProductInformataion = ({
+  draftOrderID,
+  productImage,
+  productName,
+  quantity,
+  Total,
+  Taxes,
+  InvoiceUrl,
+}) => {
   const {
     ModuleDataObject,
     handleAccordionClick,
@@ -30,6 +38,7 @@ const ProductInformataion = () => {
 
   useEffect(() => {
     setAccordionActive(0);
+
     return () => {};
   }, []);
 
@@ -64,7 +73,15 @@ const ProductInformataion = () => {
               </div>
             </div>
 
-            <Checkout />
+            <Checkout
+            // draftOrderID={draftOrderID}
+            // productImage={productImage}
+            // productName={productName}
+            // quantity={quantity}
+            // Total={Total}
+            // Taxes={Taxes}
+            // InvoiceUrl={InvoiceUrl}
+            />
           </div>
         </div>
 

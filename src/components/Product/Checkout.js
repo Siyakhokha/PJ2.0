@@ -2,9 +2,14 @@ import React, { useContext } from 'react';
 import { ShopifyData } from '../../Context/ShopifyData';
 import { PersonalNavigationEvent } from '../../utils/mparticleEvents';
 const Checkout = () => {
-  const { quantity, nextClick, mobiQuantity, adJustQuantity } = useContext(
-    ShopifyData,
-  );
+  const {
+    quantity,
+    nextClick,
+    mobiQuantity,
+    adJustQuantity,
+    productTotal,
+    productTax,
+  } = useContext(ShopifyData);
 
   return (
     <>

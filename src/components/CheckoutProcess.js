@@ -26,6 +26,7 @@ import Loading from '../helpers/Loading/Loading';
 import ProductInformataion from './Product/ProductInformataion';
 import StepCounter from './Stepper/StepCounter';
 import PaymentIft from './PaymentIft/PaymentIft';
+import { ProductIdDecoded } from '../utils/ProductIdDecoded';
 
 const axios = require('axios');
 
@@ -47,6 +48,8 @@ const CheckoutProcess = () => {
     setStep,
     data,
     setProductTitle,
+    setProductCode,
+    ProductCode,
   } = useContext(ShopifyData);
 
   const [showElipsis, setShowElipsis] = useState(false);
@@ -344,7 +347,11 @@ const CheckoutProcess = () => {
   };
 
   setProductID(data.productByHandle.variants.edges[0].node.id);
+
   setProductTitle(data.productByHandle.title);
+  setProductCode(data.productByHandle.id);
+
+  // console.log('ID', data.productByHandle.id);
 
   //Next Btn status 1
   //if there are no invalids open up the submit
@@ -395,43 +402,7 @@ const CheckoutProcess = () => {
 
   /* to catch the city auto fetch suburbs list */
   useEffect(() => {
-    // setTimeout(() => getSurburbList('morningside'), 800);
-
-    // if (deliveryDetails.current !== null && step === 1) {
-    //   let searchTimer;
-
-    //   deliveryDetails.current.querySelector(
-    //     'input[name="suburb"]',
-    //   ).onkeyup = function() {
-    //     let searchTerm = deliveryDetails.current.querySelector(
-    //       'input[name="suburb"]',
-    //     ).value;
-    //     searchTimer = setTimeout(() => getSurburbList(searchTerm), 800);
-    //   };
-    //   deliveryDetails.current.querySelector(
-    //     'input[name="suburb"]',
-    //   ).onkeydown = function() {
-    //     clearTimeout(searchTimer);
-    //   };
-    // }
-
-    // if (paymentDetailsRef.current !== null && step === 1) {
-    //   let searchTimer;
-
-    //   paymentDetailsRef.current.querySelector(
-    //     'input[name="suburbbiz"]',
-    //   ).onkeyup = function() {
-    //     let searchTerm = paymentDetailsRef.current.querySelector(
-    //       'input[name="suburbbiz"]',
-    //     ).value;
-    //     searchTimer = setTimeout(() => getSurburbList(searchTerm), 800);
-    //   };
-    //   paymentDetailsRef.current.querySelector(
-    //     'input[name="suburbbiz"]',
-    //   ).onkeydown = function() {
-    //     clearTimeout(searchTimer);
-    //   };
-    // }
+    window.scrollTo(0, 0);
 
     canSetNextBtnActive();
   }, [step]);
@@ -543,6 +514,9 @@ const CheckoutProcess = () => {
         );
         setDraftOrderID(json.data.draftOrderCreate.draftOrder.id);
         PaymentNavigationEvent();
+
+        let newProductCode = ProductIdDecoded(ProductCode);
+
         AddToCartEvent(
           formDataObject,
           json.data.draftOrderCreate.draftOrder.id,
@@ -551,7 +525,8 @@ const CheckoutProcess = () => {
           quantity,
           Total,
           Taxes,
-          InvoiceUrl,
+          // InvoiceUrl,
+          newProductCode,
         );
       }
     } catch (error) {
@@ -563,7 +538,15 @@ const CheckoutProcess = () => {
     <>
       {step == -1 && (
         <div id="one" className="container">
-          <ProductInformataion />
+          <ProductInformataion
+            draftOrderID={draftOrderID}
+            productImage={productImage}
+            productName={productName}
+            quantity={quantity}
+            Total={Total}
+            Taxes={Taxes}
+            InvoiceUrl={InvoiceUrl}
+          />
         </div>
       )}
       {NextStep == false && (step == 0 || step == 1 || step == 2) && (
@@ -663,7 +646,7 @@ const CheckoutProcess = () => {
                     pmtImage={productImage}
                     pmtProductName={productName}
                     pmtQuantity={quantity}
-                    pmtInvoiceUrl={InvoiceUrl}
+                    newProductCode={ProductIdDecoded(ProductCode)}
                   />
                 </div>
               </>

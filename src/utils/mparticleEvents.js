@@ -1,5 +1,3 @@
-let customFlags = { 'Facebook.EventSourceUrl': window.location.href };
-
 export const AddToCartEvent = (
   formDataObject,
   draftOrderID,
@@ -8,6 +6,7 @@ export const AddToCartEvent = (
   quantity,
   Total,
   Taxes,
+  newProductCode,
 ) => {
   let gaUserId = document.cookie
     .match(/_ga=(.+?);/)[1]
@@ -27,8 +26,8 @@ export const AddToCartEvent = (
 
     let product1 = mParticle.eCommerce.createProduct(
       productName, // Name
-      productName, // SKU
-      parseInt(Total), // Price
+      parseInt(newProductCode), // SKU
+      parseInt(Total).toFixed(2), // Price
       parseInt(quantity), // Quantity
       'Card Machines',
       'card-machines',
@@ -36,7 +35,7 @@ export const AddToCartEvent = (
       1,
       '0000',
       {
-        sku: productName,
+        sku: parseInt(newProductCode),
         image_url: productImage,
       },
     );
@@ -45,31 +44,33 @@ export const AddToCartEvent = (
     let transactionAttributes = {
       Affiliation: 'Hubspot Website',
       Id: draftOrderID,
-      Revenue: parseInt(Total),
-      Tax: parseInt(Taxes),
+      Revenue: parseInt(Total).toFixed(2),
+      Tax: parseInt(Taxes).toFixed(2),
       Shipping: 100,
       Step: 1,
     };
     let customAttributes = {
+      content_type: 'card-machines',
       cart_url: `https://www.ikhokha.com/abandoned-cart-product-display?${draftOrderID.replace(
         'gid://shopify/DraftOrder/',
         '',
       )}`,
       braze_abandoned_cart: 'true',
       event_source: 'Online',
-      cart_total: parseInt(Total),
+      cart_total: parseInt(Total).toFixed(2),
       currency_code: 'ZAR',
     };
     let customFlags = {
       'Facebook.EventSourceUrl': window.location.href,
       'Google.Category': 'ecommerce',
       'Google.Label': 'Purchase Journey 2',
-      'Google.Value': parseInt(Total),
+      'Google.Value': parseInt(Total).toFixed(2),
       'Google.Location': window.location.href,
       'Google.Hostname': window.location.hostname,
       'Google.Page': window.location.pathname,
       'Google.DocumentReferrer': document.referrer,
     }; // if not passing any custom flags, pass null
+
     mParticle.eCommerce.logProductAction(
       mParticle.ProductActionType.AddToCart,
       [product1],
@@ -77,9 +78,27 @@ export const AddToCartEvent = (
       customFlags,
       transactionAttributes,
     );
+    mParticle.eCommerce.logProductAction(
+      mParticle.ProductActionType.ViewDetail,
+      [product1],
+      customAttributes,
+      customFlags,
+      transactionAttributes,
+    );
+    createImpressionProduct(productName, product1);
   };
   mParticle.eCommerce.setCurrencyCode('ZAR');
   mParticle.Identity.identify(identityRequest, identityCallback);
+};
+
+const createImpressionProduct = (productName, product) => {
+  let impression = mParticle.eCommerce.createImpression(productName, product);
+  mParticle.eCommerce.logImpression(
+    impression,
+    {},
+    {},
+    mParticle.ProductActionType.AddToCart,
+  );
 };
 
 export const CheckoutEvent = (
@@ -90,6 +109,7 @@ export const CheckoutEvent = (
   quantity,
   Total,
   Taxes,
+  newProductCode,
 ) => {
   let identityRequest = {
     userIdentities: {
@@ -99,8 +119,8 @@ export const CheckoutEvent = (
   let identityCallback = function() {
     let product1 = mParticle.eCommerce.createProduct(
       productName,
-      productName,
-      parseInt(Total),
+      newProductCode,
+      parseInt(Total).toFixed(2),
       parseInt(quantity),
       'Card Machines',
       'card-machines',
@@ -108,7 +128,7 @@ export const CheckoutEvent = (
       1,
       '0000',
       {
-        sku: productName,
+        sku: newProductCode,
         image_url: productImage,
       },
     );
@@ -116,12 +136,13 @@ export const CheckoutEvent = (
     let transactionAttributes = {
       Affiliation: 'Hubspot Website',
       Id: draftOrderID,
-      Revenue: parseInt(Total),
+      Revenue: parseInt(Total).toFixed(2),
       Tax: parseInt(Taxes),
       Shipping: 100,
       Step: 2,
     };
     let customAttributes = {
+      content_type: 'card-machines',
       cart_url: `https://www.ikhokha.com/abandoned-cart-product-display?${draftOrderID.replace(
         'gid://shopify/DraftOrder/',
         '',
@@ -129,20 +150,20 @@ export const CheckoutEvent = (
       event_source: 'Online',
       company_name: formDataObject.current.firstName.value,
       sub_total: parseInt(Total - Taxes),
-      cart_total: parseInt(Total),
+      cart_total: parseInt(Total).toFixed(2),
       currency_code: 'ZAR',
       discount_code: '000',
       discount_amount: 0,
       billing_address_changed: false,
       billing_address: formDataObject.current.streetAddress.value,
-      billing_zip: formDataObject.current.postalcode.value,
+      billing_zip: parseInt(formDataObject.current.postalcode.value),
       billing_city: formDataObject.current.city.value,
       billing_state: formDataObject.current.province.value
         .replace('-', '')
         .replace(' ', ''),
       billing_country: formDataObject.current.country.value,
       delivery_address: formDataObject.current.streetAddress.value,
-      delivery_zip: formDataObject.current.postalcode.value,
+      delivery_zip: parseInt(formDataObject.current.postalcode.value),
       delivery_city: formDataObject.current.city.value,
       delivery_state: formDataObject.current.province.value
         .replace('-', '')
@@ -154,7 +175,7 @@ export const CheckoutEvent = (
       'Facebook.EventSourceUrl': window.location.href,
       'Google.Category': 'ecommerce',
       'Google.Label': 'Purchase Journey 2',
-      'Google.Value': parseInt(Total),
+      'Google.Value': parseInt(Total).toFixed(2),
       'Google.Location': window.location.href,
       'Google.Hostname': window.location.hostname,
       'Google.Page': window.location.pathname,
@@ -197,6 +218,24 @@ export const DeliveryNavigationEvent = () => {
     mParticle.EventType.Navigation,
     {
       source_page: 'Delivery',
+    },
+    {
+      'Facebook.EventSourceUrl': window.location.href,
+      'Google.Location': window.location.href,
+      'Google.Hostname': window.location.hostname,
+      'Google.Page': window.location.pathname,
+      'Google.DocumentReferrer': document.referrer,
+    },
+    {},
+    {},
+  );
+};
+export const BankingDetails = () => {
+  mParticle.logEvent(
+    'Banking Details',
+    mParticle.EventType.other,
+    {
+      BankName: 'Absa',
     },
     {
       'Facebook.EventSourceUrl': window.location.href,
