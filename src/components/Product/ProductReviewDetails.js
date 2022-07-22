@@ -7,7 +7,7 @@ const ProductReviewDetails = () => {
   return (
     <>
       <p className="product-review-container__stars">
-        {ReviewData.response && (
+        {ReviewData?.response && (
           <StarRating
             unit="float"
             size={16}
@@ -15,21 +15,21 @@ const ProductReviewDetails = () => {
             count={1}
             innerRadius={20}
             emptyColor="#fff"
-            initialRating={ReviewData.response.value}
+            initialRating={ReviewData?.response?.value}
           />
         )}
         <span>
-          {ReviewData.response &&
-            ReviewData.response.bottomline.average_score.toFixed(1)}
+          {ReviewData?.response &&
+            ReviewData?.response?.bottomline?.average_score.toFixed(1)}
         </span>
       </p>
-      {ReviewData.response && (
+      {ReviewData?.response && (
         <a
           href="#Reviews"
           className="product-review-container__numberOfReviews"
           onClick={() => handleAccordionClick(1)}
         >
-          Reviews({ReviewData.response.bottomline.total_review})
+          Reviews({ReviewData?.response?.bottomline?.total_review})
         </a>
       )}
     </>

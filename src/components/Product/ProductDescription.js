@@ -6,9 +6,9 @@ const ProductDescription = () => {
 
   return (
     <>
-      {ModuleDataObject.product_description && (
+      {ModuleDataObject?.product_description && (
         <p className="product-review-container__name">
-          {ModuleDataObject.product_description}
+          {ModuleDataObject?.product_description}
           <span>
             <a href="#Product-accordion">See more{'>'}</a>
           </span>

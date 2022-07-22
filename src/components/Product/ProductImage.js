@@ -5,11 +5,11 @@ const ProductImage = () => {
   const { data } = useContext(ShopifyData);
   return (
     <>
-      {data.productByHandle.images.edges[2].node.transformedSrc && (
+      {data?.productByHandle?.images?.edges[2]?.node?.transformedSrc && (
         <img
           className="main-product-image"
-          src={data.productByHandle.images.edges[2].node.transformedSrc}
-          alt={data.productByHandle.images.edges[2].node.transformedSrc}
+          src={data?.productByHandle?.images?.edges[2]?.node?.transformedSrc}
+          alt={data?.productByHandle?.images?.edges[2]?.node?.transformedSrc}
         />
       )}
     </>

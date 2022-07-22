@@ -9,8 +9,8 @@ const ProductTitle = () => {
   return (
     <>
       <h2 className="buy-product-title">
-        {data.productByHandle.title &&
-          data.productByHandle.title.replace('(SIM Included)', '')}
+        {data?.productByHandle?.title &&
+          data?.productByHandle?.title.replace('(SIM Included)', '')}
       </h2>
       <p className="product-review-container__sim">{Sim_text && Sim_text}</p>
     </>

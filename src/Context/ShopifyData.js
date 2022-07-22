@@ -44,7 +44,7 @@ const ShopifyDataProvider = ({ children }) => {
   const getReviews = async () => {
     const url = `${process.env.YOTPO_URL}/${
       process.env.YOTPO_CLIENT_KEY
-    }/products/${ModuleDataObject.product_id.toString()}/reviews.json?per_page=${perPage}&page=${pageNumber}`;
+    }/products/${ModuleDataObject?.product_id.toString()}/reviews.json?per_page=${perPage}&page=${pageNumber}`;
 
     const options = {
       method: 'GET',
@@ -59,7 +59,7 @@ const ShopifyDataProvider = ({ children }) => {
       const ReviewData = await res.json();
       setReviewData(ReviewData);
       setpageCount(
-        Math.ceil(ReviewData.response.bottomline.total_review / perPage),
+        Math.ceil(ReviewData?.response?.bottomline?.total_review / perPage),
       );
     } catch (error) {
       console.log(error);
@@ -82,8 +82,8 @@ const ShopifyDataProvider = ({ children }) => {
       body: JSON.stringify({
         domain: 'https://shop.ikhokha.com',
         appkey: process.env.YOTPO_CLIENT_KEY,
-        sku: ModuleDataObject.product_Slug,
-        product_url: `https://shop.ikhokha.com/products/${ModuleDataObject.product_Slug}`,
+        sku: ModuleDataObject?.product_Slug,
+        product_url: `https://shop.ikhokha.com/products/${ModuleDataObject?.product_Slug}`,
         product_title: ProductTitle,
         display_name: firstname,
         email: email,
@@ -175,7 +175,7 @@ const ShopifyDataProvider = ({ children }) => {
 
   const { loading, error, data } = useQuery(GET_PRODUCT_BY_HANDLE, {
     variables: {
-      productByHandleHandle: ModuleDataObject.product_Slug,
+      productByHandleHandle: ModuleDataObject?.product_Slug,
       variantsFirst: 1,
       imagesFirst: 3,
     },
@@ -191,13 +191,15 @@ const ShopifyDataProvider = ({ children }) => {
     return (
       <Alerts ErrortextAlert="Cant find product please check product slug." />
     );
-  let productName = data.productByHandle.title.replace('(SIM Included)', '');
-  let productImage = data.productByHandle.images.edges[2].node.transformedSrc;
+  let productName = data?.productByHandle?.title.replace('(SIM Included)', '');
+  let productImage =
+    data?.productByHandle?.images?.edges[2]?.node?.transformedSrc;
   let productTotal = parseInt(
-    data.productByHandle.variants.edges[0].node.price,
+    data?.productByHandle?.variants?.edges[0]?.node?.price,
   );
   let productTax =
-    (parseInt(data.productByHandle.variants.edges[0].node.price) * 13.044) /
+    (parseInt(data?.productByHandle?.variants?.edges[0]?.node?.price) *
+      13.044) /
     100;
 
   return (

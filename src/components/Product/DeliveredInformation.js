@@ -6,15 +6,15 @@ const DeliveredInformation = () => {
 
   return (
     <>
-      {ModuleDataObject.Delivered_information &&
-        ModuleDataObject.Delivered_information.map(i => {
+      {ModuleDataObject?.Delivered_information &&
+        ModuleDataObject?.Delivered_information.map(i => {
           return (
             <div className="item-feature">
               <div className="features-highlights-container__feature">
-                <img src={i.icon.src} alt={i.icon.alt} />
+                <img src={i?.icon?.src} alt={i?.icon?.alt} />
               </div>
               <div className="features-highlights-container__feature--text">
-                {i.text}
+                {i?.text}
               </div>
             </div>
           );

@@ -1,3 +1,77 @@
+export const ViewDetailEvent = (
+  productImage,
+  productName,
+  quantity,
+  Total,
+  Taxes,
+  newProductCode,
+) => {
+  // eslint-disable-next-line no-undef
+  let product1 = mParticle.eCommerce.createProduct(
+    productName, // Name
+    parseInt(newProductCode), // SKU
+    parseInt(Total).toFixed(2), // Price
+    parseInt(quantity), // Quantity
+    'Card Machines',
+    'card-machines',
+    'iKhokha',
+    1,
+    '0000',
+    {
+      sku: parseInt(newProductCode),
+      image_url: productImage,
+    },
+  );
+
+  // 2. Summarize the transactionFF
+  let transactionAttributes = {
+    Affiliation: 'Hubspot Website',
+    Id: '000000',
+    Revenue: parseInt(Total).toFixed(2),
+    Tax: parseInt(Taxes),
+    Shipping: 100,
+    Step: 1,
+  };
+  let customAttributes = {
+    content_type: 'card-machines',
+    cart_url: `https://www.ikhokha.com/abandoned-cart-product-display?`,
+    braze_abandoned_cart: 'true',
+    event_source: 'Online',
+    cart_total: parseInt(Total).toFixed(2),
+    currency_code: 'ZAR',
+  };
+  let customFlags = {
+    'Facebook.EventSourceUrl': window.location.href,
+    'Google.Category': 'ecommerce',
+    'Google.Label': 'Purchase Journey 2',
+    'Google.Value': parseInt(Total).toFixed(2),
+    'Google.Location': window.location.href,
+    'Google.Hostname': window.location.hostname,
+    'Google.Page': window.location.pathname,
+    'Google.DocumentReferrer': document.referrer,
+  }; // if not passing any custom flags, pass null
+
+  mParticle.eCommerce.logProductAction(
+    mParticle.ProductActionType.ViewDetail,
+    [product1],
+    customAttributes,
+    customFlags,
+    transactionAttributes,
+  );
+  createImpressionProduct(productName, product1);
+};
+mParticle.eCommerce.setCurrencyCode('ZAR');
+
+const createImpressionProduct = (productName, product) => {
+  let impression = mParticle.eCommerce.createImpression(productName, product);
+  mParticle.eCommerce.logImpression(
+    impression,
+    {},
+    {},
+    mParticle.ProductActionType.AddToCart,
+  );
+};
+
 export const AddToCartEvent = (
   formDataObject,
   draftOrderID,
@@ -23,7 +97,7 @@ export const AddToCartEvent = (
 
   let identityCallback = function(result) {
     setUtmUserAttribute(result);
-
+    setPersonalUserAttribute(result, formDataObject);
     let product1 = mParticle.eCommerce.createProduct(
       productName, // Name
       parseInt(newProductCode), // SKU
@@ -78,27 +152,9 @@ export const AddToCartEvent = (
       customFlags,
       transactionAttributes,
     );
-    mParticle.eCommerce.logProductAction(
-      mParticle.ProductActionType.ViewDetail,
-      [product1],
-      customAttributes,
-      customFlags,
-      transactionAttributes,
-    );
-    createImpressionProduct(productName, product1);
   };
   mParticle.eCommerce.setCurrencyCode('ZAR');
   mParticle.Identity.identify(identityRequest, identityCallback);
-};
-
-const createImpressionProduct = (productName, product) => {
-  let impression = mParticle.eCommerce.createImpression(productName, product);
-  mParticle.eCommerce.logImpression(
-    impression,
-    {},
-    {},
-    mParticle.ProductActionType.AddToCart,
-  );
 };
 
 export const CheckoutEvent = (
@@ -116,7 +172,14 @@ export const CheckoutEvent = (
       email: formDataObject.current.email.value,
     },
   };
-  let identityCallback = function() {
+  let identityCallback = function(result) {
+    let url = `https://www.ikhokha.com/abandoned-cart-product-display?${draftOrderID.replace(
+      'gid://shopify/DraftOrder/',
+      '',
+    )}`;
+
+    setCartURLAttribute(result, url);
+
     let product1 = mParticle.eCommerce.createProduct(
       productName,
       newProductCode,
@@ -230,24 +293,7 @@ export const DeliveryNavigationEvent = () => {
     {},
   );
 };
-export const BankingDetails = () => {
-  mParticle.logEvent(
-    'Banking Details',
-    mParticle.EventType.other,
-    {
-      BankName: 'Absa',
-    },
-    {
-      'Facebook.EventSourceUrl': window.location.href,
-      'Google.Location': window.location.href,
-      'Google.Hostname': window.location.hostname,
-      'Google.Page': window.location.pathname,
-      'Google.DocumentReferrer': document.referrer,
-    },
-    {},
-    {},
-  );
-};
+
 export const PaymentNavigationEvent = () => {
   mParticle.logEvent(
     'Checkout Journey',
@@ -314,4 +360,15 @@ const setUtmUserAttribute = result => {
     User.setUserAttribute('$utm_campaign', utm_campaign);
     User.setUserAttribute('$utm_source', utm_source);
   }
+};
+const setPersonalUserAttribute = (result, Personaldata) => {
+  let User = result.getUser();
+
+  User.setUserAttribute('$firstname', Personaldata.current.firstName.value);
+  User.setUserAttribute('$lastname', Personaldata.current.lastName.value);
+};
+
+const setCartURLAttribute = (result, url) => {
+  let User = result.getUser();
+  User.setUserAttribute('$cart_url', url);
 };

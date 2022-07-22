@@ -7,15 +7,15 @@ const FreeDelivery = () => {
   return (
     <>
       <div className="product-delivery-container">
-        {ModuleDataObject.Free_delivery_icon && (
+        {ModuleDataObject?.Free_delivery_icon && (
           <img
-            src={ModuleDataObject.Free_delivery_icon.src}
-            alt={ModuleDataObject.Free_delivery_icon.alt}
+            src={ModuleDataObject?.Free_delivery_icon.src}
+            alt={ModuleDataObject?.Free_delivery_icon.alt}
           />
         )}
         <p>
-          {ModuleDataObject.Free_delivery_text &&
-            ModuleDataObject.Free_delivery_text}
+          {ModuleDataObject?.Free_delivery_text &&
+            ModuleDataObject?.Free_delivery_text}
         </p>
       </div>
     </>

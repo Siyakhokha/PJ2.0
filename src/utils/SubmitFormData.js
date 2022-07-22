@@ -25,7 +25,13 @@ export const SubmitDataPersonal = async (DataPersonal, setNextStep) => {
       {
         objectTypeId: '0-1',
         name: 'mobilephone',
-        value: DataPersonal.current.cellNumber.value,
+        value: '+27' + DataPersonal.current.cellNumber.value.substring(1),
+      },
+
+      {
+        objectTypeId: '0-1',
+        name: 'phone',
+        value: '+27' + DataPersonal.current.cellNumber.value.substring(1),
       },
     ],
     context: {

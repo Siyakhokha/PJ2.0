@@ -3,8 +3,8 @@ import './Loading.scss';
 
 const Loading = ({ text }) => {
   return (
-    <div className="loader">
-      <div className="loader-item">
+    <div className="loading-bar">
+      <div className="loading-bar-item">
         <img
           src="https://f.hubspotusercontent40.net/hubfs/6412394/LoadingLogo.gif"
           alt="iK-Load-Animation"

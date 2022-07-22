@@ -12,12 +12,12 @@ const GeneralInfo = () => {
             <div className="item-feature">
               <div className="features-highlights-container__general_info--icon">
                 <img
-                  src={i.general_info_image.src}
-                  alt={i.general_info_image.alt}
+                  src={i?.general_info_image.src}
+                  alt={i?.general_info_image.alt}
                 />
               </div>
               <div className="features-highlights-container__general_info--text">
-                {i.general_info_text}
+                {i?.general_info_text}
               </div>
             </div>
           );

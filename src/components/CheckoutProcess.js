@@ -351,8 +351,6 @@ const CheckoutProcess = () => {
   setProductTitle(data.productByHandle.title);
   setProductCode(data.productByHandle.id);
 
-  // console.log('ID', data.productByHandle.id);
-
   //Next Btn status 1
   //if there are no invalids open up the submit
   const canSetNextBtnActive = () => {
@@ -403,7 +401,6 @@ const CheckoutProcess = () => {
   /* to catch the city auto fetch suburbs list */
   useEffect(() => {
     window.scrollTo(0, 0);
-
     canSetNextBtnActive();
   }, [step]);
 
@@ -424,9 +421,7 @@ const CheckoutProcess = () => {
         setIsDeskTop(false);
       }
     };
-
     window.addEventListener('resize', handleResize);
-
     return () => {
       window.removeEventListener('resize', handleResize);
     };
@@ -525,7 +520,6 @@ const CheckoutProcess = () => {
           quantity,
           Total,
           Taxes,
-          // InvoiceUrl,
           newProductCode,
         );
       }

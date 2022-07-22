@@ -8,13 +8,15 @@ const ProductReviews = () => {
 
   return (
     <>
-      {ReviewData.response &&
-        ReviewData.response.reviews.map(i => {
+      {ReviewData?.response &&
+        ReviewData?.response?.reviews.map(i => {
           return (
             <div className="product-accordion__item--reviews-item">
               <div className="product-accordion__item--reviews-item-top">
-                <h5>{unescape(i.user.display_name.replace(/&#x27;/g, "'"))}</h5>
-                <p>{i.created_at.split('T')[0]}</p>
+                <h5>
+                  {unescape(i?.user?.display_name?.replace(/&#x27;/g, "'"))}
+                </h5>
+                <p>{i?.created_at?.split('T')[0]}</p>
               </div>
               <StarRating
                 unit="float"
@@ -23,7 +25,7 @@ const ProductReviews = () => {
                 innerRadius={20}
                 size={15}
               />
-              <p>{unescape(i.content.replace(/&#x27;/g, "'"))}</p>
+              <p>{unescape(i?.content?.replace(/&#x27;/g, "'"))}</p>
               <p></p>
             </div>
           );

@@ -15,6 +15,8 @@ import FreeDelivery from './FreeDelivery';
 import MobileCheckout from './MobileCheckout';
 import Checkout from './Checkout';
 import { ShopifyData } from '../../Context/ShopifyData';
+import { ViewDetailEvent } from '../../utils/mparticleEvents';
+import { ProductIdDecoded } from '../../utils/ProductIdDecoded';
 
 const ProductInformataion = ({
   draftOrderID,
@@ -26,6 +28,7 @@ const ProductInformataion = ({
   InvoiceUrl,
 }) => {
   const {
+    data,
     ModuleDataObject,
     handleAccordionClick,
     setAccordionActive,
@@ -40,6 +43,19 @@ const ProductInformataion = ({
     setAccordionActive(0);
 
     return () => {};
+  }, []);
+
+  useEffect(() => {
+    if (data?.productByHandle?.id) {
+      ViewDetailEvent(
+        productImage,
+        productName,
+        quantity,
+        data?.productByHandle?.variants?.edges[0]?.node?.price,
+        (data?.productByHandle?.variants?.edges[0]?.node?.price * 13.044) / 100,
+        ProductIdDecoded(data?.productByHandle?.id),
+      );
+    }
   }, []);
 
   return (
@@ -66,8 +82,8 @@ const ProductInformataion = ({
 
                 <div className="features-highlights-container__general_info--payment-logos">
                   <img
-                    src={ModuleDataObject.Payment_logos.src}
-                    alt={ModuleDataObject.Payment_logos.alt}
+                    src={ModuleDataObject?.Payment_logos?.src}
+                    alt={ModuleDataObject?.Payment_logos?.alt}
                   />
                 </div>
               </div>
